@@ -34,6 +34,7 @@ const homeController = require('./controllers/home');
 const userController = require('./controllers/user');
 const apiController = require('./controllers/api');
 const contactController = require('./controllers/contact');
+const serviceController = require('./controllers/service');
 
 /**
  * API keys and Passport configuration.
@@ -50,7 +51,7 @@ const app = express();
  */
 mongoose.Promise = global.Promise;
 mongoose.connect(process.env.MONGODB_URI || process.env.MONGOLAB_URI);
-mongoose.connection.on('error', (err) => {
+mongoose.connection.on('error', err => {
   console.error(err);
   console.log('%s MongoDB connection error. Please make sure MongoDB is running.', chalk.red('✗'));
   process.exit();
@@ -65,24 +66,28 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 app.use(expressStatusMonitor());
 app.use(compression());
-app.use(sass({
-  src: path.join(__dirname, 'public'),
-  dest: path.join(__dirname, 'public')
-}));
+app.use(
+  sass({
+    src: path.join(__dirname, 'public'),
+    dest: path.join(__dirname, 'public'),
+  })
+);
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(expressValidator());
-app.use(session({
-  resave: true,
-  saveUninitialized: true,
-  secret: process.env.SESSION_SECRET,
-  store: new MongoStore({
-    url: process.env.MONGODB_URI || process.env.MONGOLAB_URI,
-    autoReconnect: true,
-    clear_interval: 3600
+app.use(
+  session({
+    resave: true,
+    saveUninitialized: true,
+    secret: process.env.SESSION_SECRET,
+    store: new MongoStore({
+      url: process.env.MONGODB_URI || process.env.MONGOLAB_URI,
+      autoReconnect: true,
+      clear_interval: 3600,
+    }),
   })
-}));
+);
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
@@ -101,14 +106,15 @@ app.use((req, res, next) => {
 });
 app.use((req, res, next) => {
   // After successful login, redirect back to the intended page
-  if (!req.user &&
-      req.path !== '/login' &&
-      req.path !== '/signup' &&
-      !req.path.match(/^\/auth/) &&
-      !req.path.match(/\./)) {
+  if (
+    !req.user &&
+    req.path !== '/login' &&
+    req.path !== '/signup' &&
+    !req.path.match(/^\/auth/) &&
+    !req.path.match(/\./)
+  ) {
     req.session.returnTo = req.path;
-  } else if (req.user &&
-      req.path === '/account') {
+  } else if (req.user && req.path === '/account') {
     req.session.returnTo = req.path;
   }
   next();
@@ -135,6 +141,11 @@ app.post('/account/profile', passportConfig.isAuthenticated, userController.post
 app.post('/account/password', passportConfig.isAuthenticated, userController.postUpdatePassword);
 app.post('/account/delete', passportConfig.isAuthenticated, userController.postDeleteAccount);
 app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userController.getOauthUnlink);
+
+app.get('/services', serviceController.getServices);
+app.post('/services', serviceController.createServices);
+// app.put('/services', serviceController.updateServices)
+// app.delete('/services/:service', serviceController.deleteServices);
 
 /**
  * API examples routes.
