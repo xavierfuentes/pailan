@@ -10,9 +10,10 @@
         i.fa.fa-cube
         | ExpensIt
     .collapse.navbar-collapse
-      ul.nav.navbar-nav
-        li(class=(title === 'Services') ? 'active' : undefined)
-          a(href='/services') Services
+      if user
+        ul.nav.navbar-nav
+          li(class=(title === 'Services') ? 'active' : undefined)
+            a(href='/services') Services
       ul.nav.navbar-nav.navbar-right
         if !user
           li(class=(title === 'Login') ? 'active' : undefined)
