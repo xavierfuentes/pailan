@@ -20,7 +20,8 @@ exports.createServices = (req, res, next) => {
 
   const service = new Service({
     name: req.body.name,
-    user: req.body.user,
+    userid: req.user.id,
+    username: req.body.username,
     password: req.body.password,
   });
 
