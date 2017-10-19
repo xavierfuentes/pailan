@@ -2,17 +2,29 @@ version: '2'
 services:
   mongo:
     image: mongo:3.4
+    ports:
+      - "27117:27017"
+
+  mongo-seed:
+    image: mongo:3.4
+    links:
+      - mongo
+    volumes:
+      - ./seed:/seed
+    command:
+      "mongoimport -h mongo -d expensit -c services --type json --file /seed/services.json --jsonArray"
+
   web:
     build: .
     ports:
-     - "3000:3000"
+     - "5000:3000"
     environment:
-     - MONGODB_URI=mongodb://mongo:27017/test 
+     - MONGODB_URI=mongodb://mongo:27017/expensit
     links:
-     - mongo 
-    depends_on: 
-     - mongo 
+     - mongo
+    depends_on:
+     - mongo
+     - mongo-seed
     volumes:
      - .:/starter
      - /starter/node_modules
-     
