@@ -10,7 +10,7 @@ const User = require('../models/User.js');
 
 exports.getServices = (req, res) => {
   Service.find({ $or: [{ owner: req.user.id }, { owner: 'default' }] }, (err, services) => {
-    res.render('services/list', { services, caca: 'devaca' });
+    res.render('services/list', { services });
   });
   // .allByUser(req.user.id)
   // .exec((err, services) => {

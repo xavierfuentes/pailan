@@ -6,10 +6,11 @@ const serviceSchema = new mongoose.Schema(
     name: String,
     slug: { type: String, unique: true, index: true },
     url: String,
-    // logo: String,
+    logo: String,
     owner: { type: mongoose.Schema.Types.ObjectId, index: true },
     user: String,
     password: String,
+    // invoices: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Invoice' }]
   },
   { timestamps: true }
 );
