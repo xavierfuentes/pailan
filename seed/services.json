@@ -1,15 +1,18 @@
 [
   {
+    "_id": ObjectId("59e7eba78002e24813c03166"),
     "name": "Example Service 1",
     "url": "http://www.example-service1.com",
     "owner": "default"
   },
   {
+    "_id": ObjectId("59e7eba78002e24813c03167"),
     "name": "Example Service 2",
     "url": "http://www.example-service2.com",
     "owner": "default"
   },
   {
+    "_id": ObjectId("59e7eba78002e24813c03168"),
     "name": "Example Service 3",
     "url": "http://www.example-service3.com",
     "owner": "default"

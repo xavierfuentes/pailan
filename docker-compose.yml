@@ -12,7 +12,7 @@ services:
     volumes:
       - ./seed:/seed
     command:
-      "mongoimport -h mongo -d expensit -c services --type json --file /seed/services.json --jsonArray"
+      "mongoimport -h mongo -d expensit -c services --type json --mode upsert --file /seed/services.json --jsonArray"
 
   web:
     build: .

@@ -4,11 +4,14 @@ block content
   .page-header
     h3 All Services
 
+  h3 Add Service
   ul
     for service in services
-      li: span.service-name= service.name
+      li.service-card
+        span.service-name=service.name
+        span.service-name=service.url
 
-  h3 Add New Service
+  h3 Add Custom Service
   form.form-horizontal(method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
     .form-group
@@ -16,9 +19,9 @@ block content
       .col-sm-7
         input.form-control(type='text', name='name', id='name', placeholder='Name', autofocus, required)
     .form-group
-      label.col-sm-3.control-label(for='username') User
+      label.col-sm-3.control-label(for='user') User
       .col-sm-7
-        input.form-control(type='text', name='username', id='username', placeholder='User', required)
+        input.form-control(type='text', name='user', id='user', placeholder='User', required)
     .form-group
       label.col-sm-3.control-label(for='password') Password
       .col-sm-7
