@@ -5,8 +5,9 @@ block content
     h3 All Services
 
   h3 Add Service
-  form.form-horizontal(method='POST')
+  form.add-service-form.form-horizontal(method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
+    input(type='hidden', name='selectedServiceId', id='selectedServiceId')
     .form-group
       label.col-sm-3.control-label(for='user') User
       .col-sm-7
@@ -17,10 +18,10 @@ block content
         input.form-control(type='password', name='password', id='password', placeholder='Password', required)
     .form-group
       .col-sm-offset-3.col-sm-7
-        button.col-sm-3.btn.btn-primary(type='submit')
+        button.add-service-button.col-sm-3.btn.btn-primary(type='submit')
           | Add Service
     for service in services
       .form-check
         label.form-check-label
-          input.services-list-radio.form-check-input(type='radio', name='serviceRadio', value=service.id, checked='')
+          input.services-list-radio.form-check-input(type='radio', name='serviceRadio', value=service.id, required)
           | &nbsp;#{service.name}

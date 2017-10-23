@@ -1,12 +1,11 @@
+const encrypt = require('../lib/encription').encrypt;
 const mongoose = require('mongoose');
-const slug = require('slug');
 
 const Schema = mongoose.Schema;
 
 const serviceSchema = new Schema(
   {
     name: String,
-    slug: { type: String, unique: true, index: true },
     url: String,
     logo: String,
     category: String,
@@ -21,7 +20,14 @@ const serviceSchema = new Schema(
 serviceSchema.pre('save', function save(next) {
   const service = this;
 
-  service.slug = slug(service.name, { lower: true });
+  if (!service.isModified('password')) {
+    return next();
+  }
+
+  // encrypt user's username and password
+  // service.user = encrypt(service.user);
+  service.password = encrypt(service.password);
+
   next();
 });
 
