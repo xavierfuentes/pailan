@@ -23,12 +23,12 @@ exports.getServicesAvailable = (req, res) => {
 };
 
 exports.addService = (req, res, next) => {
-  // const errors = req.getValidationResult();
+  const errors = req.validationErrors();
 
-  // if (errors) {
-  //   req.flash('errors', errors);
-  //   return res.redirect('/services');
-  // }
+  if (errors) {
+    req.flash('errors', errors);
+    return res.redirect('/services');
+  }
 
   Service.findById(req.body.selectedServiceId, (err, serviceTemplate) => {
     if (err) {
