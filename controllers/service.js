@@ -5,20 +5,26 @@
 const ObjectId = require('mongoose').Types.ObjectId;
 const slug = require('slug');
 
-const Service = require('../models/Service.js');
-const User = require('../models/User.js');
+const Service = require('../models/Service');
+const User = require('../models/User');
 
-exports.getServices = (req, res) => {
-  Service.find({ $or: [{ owner: req.user.id }, { owner: 'default' }] }, (err, services) => {
-    res.render('services/list', { services });
-  });
-  // .allByUser(req.user.id)
-  // .exec((err, services) => {
-  //   res.render('services/list', { services });
-  // });
+exports.getActiveServices = (req, res) => {
+  Service.find()
+    .allPrivateByUser(req.user.id)
+    .exec((err, services) => {
+      res.render('services/list', { services });
+    });
 };
 
-exports.createServices = (req, res, next) => {
+exports.getServicesAvailable = (req, res) => {
+  Service.find()
+    .allDefault()
+    .exec((err, services) => {
+      res.render('services/add', { services });
+    });
+};
+
+exports.addService = (req, res, next) => {
   const errors = req.validationErrors();
 
   if (errors) {
@@ -26,22 +32,49 @@ exports.createServices = (req, res, next) => {
     return res.redirect('/services');
   }
 
-  const service = new Service({
-    name: req.body.name,
-    url: req.body.url,
-    owner: ObjectId(req.user.id),
-    user: req.body.user,
-    password: req.body.password,
-  });
+  /**
+   * todo:
+   *  1. find the default service to clone
+   *  2. fill the gaps with the user data
+   *  3. save it
+   *  4. add it to the list of active services of the user
+   */
 
-  service.save(err => {
-    if (err) {
-      return next(err);
-    }
+  // Service.find()
+  //   .allDefault()
+  //   .exec((err, services) => {
+  //     res.render('services/add', { services });
+  //   });
 
-    req.flash('success', { msg: 'Service has been added.' });
-    res.redirect('/services');
-  });
+  // const service = new Service({
+  //   name: req.body.name,
+  //   url: req.body.url,
+  //   owner: req.user.id,
+  //   user: req.body.user,
+  //   password: req.body.password,
+  // });
+
+  // service.save((err) => {
+  //   if (err) {
+  //     return next(err);
+  //   }
+
+  //   User.findById(req.user.id, (err, user) => {
+  //     if (err) {
+  //       return next(err);
+  //     }
+
+  //     user.services.push(service);
+  //     user.save((err) => {
+  //       if (err) {
+  //         return next(err);
+  //       }
+  //     });
+  //   });
+
+  //   req.flash('success', { msg: 'Service has been added.' });
+  //   res.redirect('/services');
+  // });
 
   // Service.findOne({ slug: slug(req.body.name) }, (err, existingService) => {
   //   if (err) {

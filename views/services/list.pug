@@ -2,32 +2,9 @@ extends ../layout
 
 block content
   .page-header
+    a(href='/services/add') Add Service
     h3 All Services
-
-  h3 Add Service
-  ul
-    for service in services
-      li.service-card
-        span.service-name=service.name
-        span.service-name=service.url
-
-  h3 Add Custom Service
-  form.form-horizontal(method='POST')
-    input(type='hidden', name='_csrf', value=_csrf)
-    .form-group
-      label.col-sm-3.control-label(for='name') Name
-      .col-sm-7
-        input.form-control(type='text', name='name', id='name', placeholder='Name', autofocus, required)
-    .form-group
-      label.col-sm-3.control-label(for='user') User
-      .col-sm-7
-        input.form-control(type='text', name='user', id='user', placeholder='User', required)
-    .form-group
-      label.col-sm-3.control-label(for='password') Password
-      .col-sm-7
-        input.form-control(type='password', name='password', id='password', placeholder='Password', required)
-    .form-group
-      .col-sm-offset-3.col-sm-7
-        button.col-sm-3.btn.btn-primary(type='submit')
-          i.fa.fa-user
-          | Add Service
+    ul
+      for service in services
+        li.service-card
+          span.service-name=service.name
