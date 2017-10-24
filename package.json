@@ -75,6 +75,9 @@
     "sinon-mongoose": "^2.0.2",
     "supertest": "^3.0.0"
   },
+  "engines": {
+    "node": "8.7.0"
+  },
   "eslintConfig": {
     "extends": "airbnb-base",
     "rules": {

@@ -1,4 +1,4 @@
-FROM node:8
+FROM node:8.7.0
 
 COPY . /expensit
 COPY package.json /expensit/package.json
