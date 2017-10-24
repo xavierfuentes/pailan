@@ -1,0 +1,317 @@
+[
+  {
+    "_id": ObjectId("59e7eba78002e24813c03170"),
+    "name": "Amazon Web Services",
+    "logo": "https://images-na.ssl-images-amazon.com/images/G/01/awssignin/static/aws_logo_smile.png",
+    "category": "Hosting & Domains",
+    "url": "https://console.aws.amazon.com"
+  },
+  {
+    "_id": ObjectId("59e7eba78002e24813c03171"),
+    "name": "Digital Ocean",
+    "logo": "https://www.digitalocean.com/assets/media/logos-badges/png/DO_Logo_Vertical_Blue-6321464d.png",
+    "category": "Hosting & Domains",
+    "url": "https://cloud.digitalocean.com"
+  },
+  {
+    "_id": ObjectId("59e7eba78002e24813c03172"),
+    "name": "Linode",
+    "logo": "https://www.linode.com/media/images/logos/standard/dark/linode-logo_standard_dark_medium.png",
+    "category": "Hosting & Domains",
+    "url": "https://manager.linode.com"
+  },
+  {
+    "_id": ObjectId("59e7eba78002e24813c03173"),
+    "name": "Pivotal Web Services",
+    "logo": "https://www.3scale.net/wp-content/uploads/2015/07/Pivotal-logo.png",
+    "category": "Hosting & Domains",
+    "url": "https://console.run.pivotal.io"
+  },
+  {
+    "_id": ObjectId("59e7eba78002e24813c03174"),
+    "name": "Heroku",
+    "logo": "https://cdn.worldvectorlogo.com/logos/heroku-1.svg",
+    "category": "Hosting & Domains",
+    "url": "https://dashboard.heroku.com"
+  },
+  {
+    "_id": ObjectId("59e7eba78002e24813c03175"),
+    "name": "Godaddy",
+    "logo": "https://upload.wikimedia.org/wikipedia/en/thumb/6/6c/GoDaddy.svg/1280px-GoDaddy.svg.png",
+    "category": "Hosting & Domains",
+    "url": "ttps://account.godaddy.com"
+  },
+  {
+    "_id": ObjectId("59e7eba78002e24813c03176"),
+    "name": "Namecheap",
+    "logo": "https://www.seeklogo.net/wp-content/uploads/2016/06/namecheap-logo-vector-download.jpg",
+    "category": "Hosting & Domains",
+    "url": "https://www.namecheap.com"
+  },
+  {
+    "_id": ObjectId("59e7eba78002e24813c03177"),
+    "name": "Buffer",
+    "logo": "https://business.pinterest.com/sites/default/files/mdp_logo_lg/2017-02/buffer-888.png",
+    "category": "Marketing & Sales",
+    "url": "https://buffer.com"
+  },
+  {
+    "_id": ObjectId("59e7eba78002e24813c03178"),
+    "name": "Hootsuite",
+    "logo": "https://hootsuite.com/uploads/downloadable-assets/hootsuite-horizontal-black-registered.png",
+    "category": "Marketing & Sales",
+    "url": "https://hootsuite.com/"
+  },
+  {
+    "_id": ObjectId("59e7eba78002e24813c03179"),
+    "name": "Intercom",
+    "logo": "https://upload.wikimedia.org/wikipedia/commons/6/62/Intercom_logo.png",
+    "category": "Marketing & Sales",
+    "url": "https://app.intercom.io"
+  },
+  {
+    "_id": ObjectId("59e7eba78002e24813c03180"),
+    "name": "Mailchimp",
+    "logo": "http://thisweekinstartups.com/wp-content/uploads/2015/06/Mailchimp-Logo.jpg",
+    "category": "Marketing & Sales",
+    "url": "https://mailchimp.com"
+  },
+  {
+    "_id": ObjectId("59e7eba78002e24813c03181"),
+    "name": "Typeform",
+    "logo": "https://cdn.worldvectorlogo.com/logos/typeform.svg",
+    "category": "Marketing & Sales",
+    "url": "https://admin.typeform.com"
+  },
+  {
+    "_id": ObjectId("59e7eba78002e24813c03182"),
+    "name": "Unbounce",
+    "logo": "https://unbounce-wpengine.netdna-ssl.com/photos/Unbounce-primary-logo-light-background.png",
+    "category": "Marketing & Sales",
+    "url": "https://app.unbounce.com"
+  },
+  {
+    "_id": ObjectId("59e7eba78002e24813c03183"),
+    "name": "Olark",
+    "logo": "https://www.olark.com/img/common/layout/logo.svg",
+    "category": "Marketing & Sales",
+    "url": "https://www.olark.com"
+  },
+  {
+    "_id": ObjectId("59e7eba78002e24813c03184"),
+    "name": "Semrush",
+    "logo": "http://internetrepublica.com/wp-content/uploads/2016/09/semrush.png",
+    "category": "Marketing & Sales",
+    "url": "https://www.semrush.com"
+  },
+  {
+    "_id": ObjectId("59e7eba78002e24813c03185"),
+    "name": "Moz",
+    "logo": "https://d2eeipcrcdle6.cloudfront.net/cms/Moz-logo-blue.jpg",
+    "category": "Marketing & Sales",
+    "url": "https://moz.com/"
+  },
+  {
+    "_id": ObjectId("59e7eba78002e24813c03186"),
+    "name": "Github",
+    "logo": "https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png",
+    "category": "Dev tools",
+    "url": "https://github.com"
+  },
+  {
+    "_id": ObjectId("59e7eba78002e24813c03187"),
+    "name": "Mandrill",
+    "logo": "https://mandrill.com/assets/downloads/Mandrill_Logo_Light-Background-8f32f970.png",
+    "category": "Dev tools",
+    "url": "https://www.mandrill.com"
+  },
+  {
+    "_id": ObjectId("59e7eba78002e24813c03187"),
+    "name": "Papertrail",
+    "logo": "https://cdn.worldvectorlogo.com/logos/papertrail-2.svg",
+    "category": "Dev tools",
+    "url": "https://papertrailapp.com"
+  },
+  {
+    "_id": ObjectId("59e7eba78002e24813c03188"),
+    "name": "Sentry",
+    "logo": "https://sentry-brand.storage.googleapis.com/sentry-logo-black.svg",
+    "category": "Dev tools",
+    "url": "https://sentry.io"
+  },
+  {
+    "_id": ObjectId("59e7eba78002e24813c03189"),
+    "name": "Sendgrid",
+    "logo": "https://sendgrid.com/wp-content/themes/sgdotcom/pages/resource/brand/2016/SendGrid-Logo.png",
+    "category": "Dev tools",
+    "url": "https://sendgrid.com"
+  },
+  {
+    "_id": ObjectId("59e7eba78002e24813c03190"),
+    "name": "Travis CI",
+    "logo": "https://travis-ci.com/images/logos/TravisCI-Full-Color.png",
+    "category": "Dev tools",
+    "url": "https://travis-ci.org"
+  },
+  {
+    "_id": ObjectId("59e7eba78002e24813c03191"),
+    "name": "Twilio",
+    "logo": "https://www.twilio.com/marketing/bundles/company-brand/img/logos/red/twilio-logo-red.png",
+    "category": "Dev tools",
+    "url": "https://www.twilio.com"
+  },
+  {
+    "_id": ObjectId("59e7eba78002e24813c03192"),
+    "name": "New Relic",
+    "logo": "https://newrelic.com/assets/newrelic/source/NewRelic-logo-square.svg",
+    "category": "Dev tools",
+    "url": "https://newrelic.com"
+  },
+  {
+    "_id": ObjectId("59e7eba78002e24813c03193"),
+    "name": "Help Scout",
+    "logo": "http://zelkovavc.com/wp-content/uploads/2015/05/Unknown-3.png",
+    "category": "Support",
+    "url": "https://www.helpscout.net"
+  },
+  {
+    "_id": ObjectId("59e7eba78002e24813c03194"),
+    "name": "Atlassian",
+    "logo": "https://www.atlassian.com/assets/img/icons/imkt/imkt-navbar__charlie-logo.svg",
+    "category": "Project Management",
+    "url": "https://*.atlassian.net"
+  },
+  {
+    "_id": ObjectId("59e7eba78002e24813c03195"),
+    "name": "Basecamp",
+    "logo": "http://www.webtoolswiki.com/wp-content/uploads/2014/05/basecamp-logo.png",
+    "category": "Project Management",
+    "url": "https://3.basecamp.com"
+  },
+  {
+    "_id": ObjectId("59e7eba78002e24813c03196"),
+    "name": "Taiga",
+    "logo": "https://taiga.io/images/logo-color.png",
+    "category": "Project Management",
+    "url": "https://tree.taiga.io"
+  },
+  {
+    "_id": ObjectId("59e7eba78002e24813c03197"),
+    "name": "Asana",
+    "logo": "https://blog.asana.com/wp-content/post-images/logo_horiz1.png",
+    "category": "Project Management",
+    "url": "https://app.asana.com"
+  },
+  {
+    "_id": ObjectId("59e7eba78002e24813c03198"),
+    "name": "Trello",
+    "logo": "https://www.webprogramacion.com/imgs3/687.jpg",
+    "category": "Project Management",
+    "url": "https://trello.com"
+  },
+  {
+    "_id": ObjectId("59e7eba78002e24813c03199"),
+    "name": "Clubhouse",
+    "logo": "https://clubhouse.io/images/logo-blue.png",
+    "category": "Project Management",
+    "url": "https://app.clubhouse.io"
+  },
+  {
+    "_id": ObjectId("59e7eba78002e24813c03200"),
+    "name": "Stripe",
+    "logo": "https://stripe.com/img/about/logos/logos/blue.png",
+    "category": "Payments & Invocing",
+    "url": "https://dashboard.stripe.com"
+  },
+  {
+    "_id": ObjectId("59e7eba78002e24813c03201"),
+    "name": "Quaderno",
+    "logo": "https://pbs.twimg.com/profile_images/846726520341221380/6298hw-D.jpg",
+    "category": "Payments & Invocing",
+    "url": "https://ninive-7265.quadernoapp.com"
+  },
+  {
+    "_id": ObjectId("59e7eba78002e24813c03202"),
+    "name": "Braintree",
+    "logo": "https://www.braintreepayments.com/images/bt-logo-black-2dc4ba9a.png",
+    "category": "Payments & Invocing",
+    "url": "https://www.braintreegateway.com"
+  },
+  {
+    "_id": ObjectId("59e7eba78002e24813c03203"),
+    "name": "PayPal",
+    "logo": "https://www.anafarmex.com.mx/wp-content/uploads/2017/09/paypal-logo-preview.png",
+    "category": "Payments & Invocing",
+    "url": "https://www.paypal.com"
+  },
+  {
+    "_id": ObjectId("59e7eba78002e24813c03204"),
+    "name": "Recurly",
+    "logo": "https://recurly.com/img2/logo-purple.svg",
+    "category": "Payments & Invocing",
+    "url": "https://app.recurly.com"
+  },
+  {
+    "_id": ObjectId("59e7eba78002e24813c03205"),
+    "name": "Chargify",
+    "logo": "https://help.chargify.com/img/chargify_large.png",
+    "category": "Payments & Invocing",
+    "url": "https://app.chargify.com"
+  },
+  {
+    "_id": ObjectId("59e7eba78002e24813c03206"),
+    "name": "Quickbooks",
+    "logo": "https://www.nethelpdesk.com/img/logos/help-desk-software-quickbooks-intuit.png",
+    "category": "Payments & Invocing",
+    "url": "https://quickbooks.intuit.com"
+  },
+  {
+    "_id": ObjectId("59e7eba78002e24813c03207"),
+    "name": "Profitwell",
+    "logo": "http://home.profitwell.com/hubfs/pi_glyph_012016-1.png",
+    "category": "Payments & Invocing",
+    "url": "https://www2.profitwell.com"
+  },
+  {
+    "_id": ObjectId("59e7eba78002e24813c03208"),
+    "name": "Baremetrics",
+    "logo": "https://cdn.dribbble.com/users/244/screenshots/1325722/baremetrics_logo_d_1x.png",
+    "category": "Payments & Invocing",
+    "url": "https://app.baremetrics.com"
+  },
+  {
+    "_id": ObjectId("59e7eba78002e24813c03209"),
+    "name": "Chartmogul",
+    "logo": "https://chartmogul.com/assets/img/brand/logo-color-6d1dc3c3bb.svg",
+    "category": "Payments & Invocing",
+    "url": "https://app.chartmogul.com"
+  },
+  {
+    "_id": ObjectId("59e7eba78002e24813c03210"),
+    "name": "Zapier",
+    "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Zapier_logo.png/640px-Zapier_logo.png",
+    "category": "Others",
+    "url": "https://zapier.com"
+  },
+  {
+    "_id": ObjectId("59e7eba78002e24813c03211"),
+    "name": "Poeditor",
+    "logo": "https://poeditor.com/public/images/logo/logo_head_500_transparent.png",
+    "category": "Others",
+    "url": "https://poeditor.com"
+  },
+  {
+    "_id": ObjectId("59e7eba78002e24813c03212"),
+    "name": "GSuite",
+    "logo": "https://gsuite.google.com/img/logo/lockup_gsuite.svg",
+    "category": "Others",
+    "url": "https://admin.google.com"
+  },
+  {
+    "_id": ObjectId("59e7eba78002e24813c03213"),
+    "name": "Slack",
+    "logo": "https://www.seeklogo.net/wp-content/uploads/2015/09/slack-logo-vector-download.jpg",
+    "category": "Others",
+    "url": "https://*.slack.com"
+  }
+]

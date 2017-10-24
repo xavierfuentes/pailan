@@ -50,7 +50,7 @@ const app = express();
  * Connect to MongoDB.
  */
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGODB_URI || process.env.MONGOLAB_URI);
+mongoose.connect(process.env.MONGODB_URI || process.env.MONGOLAB_URI, { useMongoClient: true });
 mongoose.connection.on('error', err => {
   console.error(err);
   console.log('%s MongoDB connection error. Please make sure MongoDB is running.', chalk.red('✗'));
@@ -142,8 +142,9 @@ app.post('/account/password', passportConfig.isAuthenticated, userController.pos
 app.post('/account/delete', passportConfig.isAuthenticated, userController.postDeleteAccount);
 app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userController.getOauthUnlink);
 
-app.get('/services', passportConfig.isAuthenticated, serviceController.getServices);
-app.post('/services', passportConfig.isAuthenticated, serviceController.createServices);
+app.get('/services', passportConfig.isAuthenticated, serviceController.getActiveServices);
+app.get('/services/add', serviceController.getServicesAvailable);
+app.post('/services/add', passportConfig.isAuthenticated, serviceController.addService);
 // app.put('/services', serviceController.updateServices)
 // app.delete('/services/:service', serviceController.deleteServices);
 

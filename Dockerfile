@@ -1,10 +1,10 @@
 FROM node:6-slim
 
-COPY . /starter
-COPY package.json /starter/package.json
-COPY .env.example /starter/.env.example
+COPY . /expensit
+COPY package.json /expensit/package.json
+COPY .env /expensit/.env
 
-WORKDIR /starter
+WORKDIR /expensit
 
 ENV NODE_ENV production
 RUN npm install --production

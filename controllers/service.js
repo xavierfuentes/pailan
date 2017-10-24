@@ -2,15 +2,27 @@
  * GET /services
  * List all services.
  */
-const Service = require('../models/Service.js');
+const Service = require('../models/Service');
+const User = require('../models/User');
+const decrypt = require('../lib/encription').decrypt;
 
-exports.getServices = (req, res) => {
-  Service.find((err, docs) => {
-    res.render('services/list', { services: docs });
-  });
+exports.getActiveServices = (req, res) => {
+  Service.find()
+    .allPrivateByUser(req.user.id)
+    .exec((err, services) => {
+      res.render('services/list', { services });
+    });
 };
 
-exports.createServices = (req, res, next) => {
+exports.getServicesAvailable = (req, res) => {
+  Service.find()
+    .allDefault()
+    .exec((err, services) => {
+      res.render('services/add', { services });
+    });
+};
+
+exports.addService = (req, res, next) => {
   const errors = req.validationErrors();
 
   if (errors) {
@@ -18,27 +30,39 @@ exports.createServices = (req, res, next) => {
     return res.redirect('/services');
   }
 
-  const service = new Service({
-    name: req.body.name,
-    userid: req.user.id,
-    username: req.body.username,
-    password: req.body.password,
-  });
-
-  // todo: check if it's already there using something better than 'name'
-
-  Service.findOne({ name: req.body.name }, (err, existingService) => {
+  Service.findById(req.body.selectedServiceId, (err, serviceTemplate) => {
     if (err) {
       return next(err);
     }
-    if (existingService) {
-      req.flash('errors', { msg: 'Service with that name already exists.' });
-      return res.redirect('/services');
-    }
-    service.save(err => {
+
+    const service = new Service({
+      name: serviceTemplate.name,
+      url: req.body.url,
+      logo: serviceTemplate.logo,
+      category: serviceTemplate.category,
+      owner: req.user.id,
+      user: req.body.user,
+      password: req.body.password,
+    });
+
+    service.save((err) => {
       if (err) {
         return next(err);
       }
+
+      User.findById(req.user.id, (err, user) => {
+        if (err) {
+          return next(err);
+        }
+
+        user.services.push(service);
+        user.save((err) => {
+          if (err) {
+            return next(err);
+          }
+        });
+      });
+
       req.flash('success', { msg: 'Service has been added.' });
       res.redirect('/services');
     });
