@@ -1,10 +1,10 @@
 {
-  "name": "expensit",
+  "name": "pailan",
   "version": "0.0.1",
-  "description": "ExpensIt",
+  "description": "Pailan",
   "repository": {
     "type": "git",
-    "url": "https://github.com/xavifuefer/expensit.git"
+    "url": "https://github.com/xavifuefer/pailan.git"
   },
   "author": "Xavier Fuentes",
   "license": "MIT",
