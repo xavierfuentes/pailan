@@ -1,12 +1,12 @@
 version: '2'
 services:
   mongo:
-    image: mongo:3.4
+    image: mongo:3.4.9
     ports:
       - "27117:27017"
 
   mongo-seed:
-    image: mongo:3.4
+    image: mongo:3.4.9
     links:
       - mongo
     volumes:
