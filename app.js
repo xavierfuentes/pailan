@@ -143,7 +143,7 @@ app.post('/account/delete', passportConfig.isAuthenticated, userController.postD
 app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userController.getOauthUnlink);
 
 app.get('/services', passportConfig.isAuthenticated, serviceController.getActiveServices);
-app.get('/services/add', serviceController.getServicesAvailable);
+app.get('/services/add', passportConfig.isAuthenticated, serviceController.getServicesAvailable);
 app.post('/services/add', passportConfig.isAuthenticated, serviceController.addService);
 // app.put('/services', serviceController.updateServices)
 // app.delete('/services/:service', serviceController.deleteServices);
