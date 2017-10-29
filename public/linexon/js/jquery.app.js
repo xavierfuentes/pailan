@@ -1,135 +1,129 @@
-/*  Theme Name: Linexon - Responsive Bootstrap 4 Landing page template
-    Author: Themesdesign
-    Version: 1.0.0
-    File Description:Main JS file of the template
-*/
-(function($) {
+(function ($) {
+  function initNavbarStickey() {
+    $(window).scroll(() => {
+      const scroll = $(window).scrollTop();
+      if (scroll >= 50) {
+        $('.sticky').addClass('darkheader');
+      } else {
+        $('.sticky').removeClass('darkheader');
+      }
+    });
+  }
 
-    'use strict';
+  function initSmoothLink() {
+    $('.navigation-menu a').on('click', function (event) {
+      const $anchor = $(this);
+      $('html, body')
+        .stop()
+        .animate(
+          {
+            scrollTop: $($anchor.attr('href')).offset().top - 0,
+          },
+          1500,
+          'easeInOutExpo',
+        );
+      event.preventDefault();
+    });
+  }
 
-    function initNavbarStickey() {
-        $(window).scroll(function() {
-            var scroll = $(window).scrollTop();
-            if (scroll >= 50) {
-                $(".sticky").addClass("darkheader");
-            } else {
-                $(".sticky").removeClass("darkheader");
-            }
-        });
-    }
+  function initNavbarToggler() {
+    const scroll = $(window).scrollTop();
 
-    function initSmoothLink() {
-        $('.navigation-menu a').on('click', function(event) {
-            var $anchor = $(this);
-            $('html, body').stop().animate({
-                scrollTop: $($anchor.attr('href')).offset().top - 0
-            }, 1500, 'easeInOutExpo');
-            event.preventDefault();
-        });
-    }
+    $('.navbar-toggle').on('click', function (event) {
+      $(this).toggleClass('open');
+      $('#navigation').slideToggle(400);
+    });
 
+    $('.navigation-menu>li')
+      .slice(-2)
+      .addClass('last-elements');
+  }
 
-    function initNavbarToggler() {
-        var scroll = $(window).scrollTop();
+  function initScrollspy() {
+    $('#navigation').scrollspy({ offset: 70 });
+  }
 
-        $('.navbar-toggle').on('click', function(event) {
-            $(this).toggleClass('open');
-            $('#navigation').slideToggle(400);
-        });
+  function initClientSlider() {
+    $('#clients-slider').owlCarousel({
+      loop: true,
+      autoplay: true,
+      autoplayTimeout: 1000, // Set AutoPlay to 1 seconds
+      nav: false,
+      margin: 10,
+      dots: false,
+      responsive: {
+        0: {
+          items: 1,
+        },
+        600: {
+          items: 3,
+        },
+        960: {
+          items: 5,
+        },
+        1200: {
+          items: 6,
+        },
+      },
+    });
+  }
 
-        $('.navigation-menu>li').slice(-2).addClass('last-elements');
+  function initContactForm() {
+    $('#contact-form').submit(function () {
+      const action = $(this).attr('action');
 
-    }
+      $('#message').slideUp(750, () => {
+        $('#message').hide();
 
-    function initScrollspy() {
-        $("#navigation").scrollspy({ offset: 70 });
-    }
+        $('#submit')
+          .before('<img src="images/ajax-loader.gif" class="contact-loader" />')
+          .attr('disabled', 'disabled');
 
-    function initClientSlider() {
-        $("#clients-slider").owlCarousel({
-            loop:true,
-            autoplay:true,
-            autoplayTimeout:1000, //Set AutoPlay to 1 seconds
-            nav:false,
-            margin:10,
-            dots: false,
-            responsive:{
-                0:{
-                    items:1
-                },
-                600:{
-                    items:3
-                },            
-                960:{
-                    items:5
-                },
-                1200:{
-                    items:6
-                }
-            }
-        });
-    }
-
-    function initContactForm() {
-        $('#contact-form').submit(function() {
-
-            var action = $(this).attr('action');
-
-            $("#message").slideUp(750, function() {
-                $('#message').hide();
-
-                $('#submit')
-                    .before('<img src="images/ajax-loader.gif" class="contact-loader" />')
-                    .attr('disabled', 'disabled');
-
-                $.post(action, {
-                        name: $('#name').val(),
-                        email: $('#email').val(),
-                        comments: $('#comments').val(),
-                    },
-                    function(data) {
-                        document.getElementById('message').innerHTML = data;
-                        $('#message').slideDown('slow');
-                        $('#cform img.contact-loader').fadeOut('slow', function() {
-                            $(this).remove()
-                        });
-                        $('#submit').removeAttr('disabled');
-                        if (data.match('success') != null) $('#cform').slideUp('slow');
-                    }
-                );
-
+        $.post(
+          action,
+          {
+            name: $('#name').val(),
+            email: $('#email').val(),
+            comments: $('#comments').val(),
+          },
+          (data) => {
+            document.getElementById('message').innerHTML = data;
+            $('#message').slideDown('slow');
+            $('#cform img.contact-loader').fadeOut('slow', function () {
+              $(this).remove();
             });
+            $('#submit').removeAttr('disabled');
+            if (data.match('success') != null) $('#cform').slideUp('slow');
+          },
+        );
+      });
 
-            return false;
+      return false;
+    });
+  }
 
-        });
-    }
+  function initMagnificVideo() {
+    $(document).ready(() => {
+      $('.video-play-icon').magnificPopup({
+        disableOn: 700,
+        type: 'iframe',
+        mainClass: 'mfp-fade',
+        removalDelay: 160,
+        preloader: false,
 
-    function initMagnificVideo(){
-        $(document).ready(function() {
-            $('.video-play-icon').magnificPopup({
-              disableOn: 700,
-              type: 'iframe',
-              mainClass: 'mfp-fade',
-              removalDelay: 160,
-              preloader: false,
+        fixedContentPos: false,
+      });
+    });
+  }
 
-              fixedContentPos: false
-            });
-        });
-    }
-
-    function init() {
-        initNavbarStickey();
-        initSmoothLink();
-        initNavbarToggler();
-        initScrollspy();
-        initClientSlider();
-        initContactForm();
-        initMagnificVideo();
-    }
-    init();
-
-})(jQuery)
-
-
+  function init() {
+    initNavbarStickey();
+    initSmoothLink();
+    initNavbarToggler();
+    // initScrollspy();
+    initClientSlider();
+    initContactForm();
+    initMagnificVideo();
+  }
+  init();
+}(jQuery));
