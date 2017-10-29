@@ -1,0 +1,32 @@
+{
+  "name": "pailan",
+  "scripts": {
+  },
+  "env": {
+    "GOOGLE_ID": {
+      "required": true
+    },
+    "GOOGLE_SECRET": {
+      "required": true
+    },
+    "MONGOLAB_URI": {
+      "required": true
+    },
+    "SESSION_SECRET": {
+      "required": true
+    },
+    "USER_ENCRYPTION_KEY": {
+      "required": true
+    }
+  },
+  "formation": {
+  },
+  "addons": [
+    "mongolab"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}
