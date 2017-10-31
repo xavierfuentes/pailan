@@ -127,7 +127,7 @@ app.use(express.static(path.join(__dirname, 'public'), { maxAge: 31557600000 }))
 app.get('/', homeController.index);
 app.get('/signin', userController.getSignin);
 app.post('/signin', userController.postSignin);
-app.get('/logout', userController.logout);
+app.get('/signout', userController.signout);
 app.get('/forgot', userController.getForgot);
 app.post('/forgot', userController.postForgot);
 app.get('/reset/:token', userController.getReset);

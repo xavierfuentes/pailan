@@ -52,10 +52,10 @@ exports.postSignin = (req, res, next) => {
 };
 
 /**
- * GET /logout
+ * GET /signout
  * Log out.
  */
-exports.logout = (req, res) => {
+exports.signout = (req, res) => {
   req.logout();
   res.redirect('/');
 };
