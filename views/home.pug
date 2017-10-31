@@ -1,29 +1,7 @@
-extends layout
+extends base
 
 block content
-  header#topnav.defaultscroll.fixed-top.sticky
-    .container
-      div
-        a.logo.text-uppercase(href='/')
-          img.logo-light(src='linexon/images/logo-light.png', alt='', height='24')
-          img.logo-dark(src='linexon/images/logo-dark.png', alt='', height='24')
-      .menu-extras
-        .menu-item
-          a.navbar-toggle
-            .lines
-              span
-              span
-              span
-      #navigation
-        ul.navigation-menu
-          if !user
-            li
-              a(href='/signin') Signin
-            li
-              a(href='/signup') Signup
-          else
-            li(class=(title === 'Services') ? 'active' : undefined)
-              a(href='services') Services
+  include partials/header
 
   section#home.bg-home
     .bg-overlay
@@ -468,5 +446,4 @@ block content
             li.list-inline-item
               a(href='#')
                 i.mdi.mdi-apple
-  .footer-alt.bg-dark
-    p.copy-rights 2017 © Linexon. All Rights Reserved
+  include partials/footer

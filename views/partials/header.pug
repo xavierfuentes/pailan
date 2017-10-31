@@ -1,0 +1,31 @@
+header#topnav.defaultscroll.fixed-top.sticky(class=(title !== 'Home') ? 'navbar-light' : undefined)
+  .container
+    div
+      a.logo.text-uppercase(href='/')
+        img.logo-light(src='/linexon/images/logo-light.png', alt='', height='24')
+        img.logo-dark(src='/linexon/images/logo-dark.png', alt='', height='24')
+
+    .menu-extras
+      .menu-item
+        a.navbar-toggle
+          .lines
+            span
+            span
+            span
+
+    #navigation
+      ul.navigation-menu
+        if !user
+          li
+            a(href='/signin') Signin
+          li
+            a(href='/signup') Signup
+        else
+          li
+            a(href='/account') Hi #{user.profile && user.profile.name || user.email}
+          li(class=(title === 'Services') ? 'active' : undefined)
+            a(href='/services') My Services
+          li(class=(title === 'Add Service') ? 'active' : undefined)
+            a(href='/services/add') Add Service
+          li
+            a(href='/signout') Signout
