@@ -10,7 +10,7 @@ exports.getActiveServices = (req, res) => {
   Service.find()
     .allPrivateByUser(req.user.id)
     .exec((err, services) => {
-      res.render('services/list', { services });
+      res.render('services/list', { title: 'Services', services });
     });
 };
 
@@ -18,7 +18,7 @@ exports.getServicesAvailable = (req, res) => {
   Service.find()
     .allDefault()
     .exec((err, services) => {
-      res.render('services/add', { services });
+      res.render('services/add', { title: 'Add Service', services });
     });
 };
 
