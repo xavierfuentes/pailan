@@ -4,17 +4,22 @@ $(function() {
   /* Services */
 
   // selectors
-  var servicesRadioButtons = $('input.services-list-radio')
   var serviceSelectedId = null;
   var userDataForm = $('add-service-form');
   var serviceIdInput = $('input#selectedServiceId');
-  var AddServiceButton = $('.add-service-button');
+  var AddServiceButton = $('#add-service-button');
+  var ServiceLogos = $('#add-service').find('.service-logo');
+  var UserInput = $('#user');
+  var PasswordInput = $('#password');
 
   // Events
-  servicesRadioButtons.change(function() {
-    serviceSelectedId = $('.services-list-radio:checked').val();
-    // AddServiceButton.prop('disabled', false);
-    serviceIdInput.val(serviceSelectedId)
-  });
+  ServiceLogos.click(function(event) {
+    serviceSelectedId = $(this).data('id');
+    serviceIdInput.val(serviceSelectedId);
+    UserInput.prop('disabled', false);
+    PasswordInput.prop('disabled', false);
+    ServiceLogos.removeClass('active');
+    $(this).addClass('active');
+  })
 
 });
