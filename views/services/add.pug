@@ -20,8 +20,8 @@ block main
             .row
               for service in services
                 .col-2.mt-3
-                  .default-service-box
-                    img.service-logo.mx-auto.d-block.img-fluid(src=service.logo, alt=service.name, data-id=service.id)
+                  .default-service-box(data-id=service.id, data-name=service.name)
+                    img.service-logo.mx-auto.d-block.img-fluid(src=service.logo, alt=service.name)
                     //- span.text-muted.mb-0 #{service.name}
                     //- .service-icon.service-left
                     //-   //- input.services-list-radio(type='radio', name='serviceRadio', value=service.id, required)
@@ -31,6 +31,11 @@ block main
                     //-   | #{service.name}
 
           .col-lg-3.offset-md-1.mt-3
+            .row
+              .col-md
+                .form-group
+                  label(for='service') Service
+                  input#service.form-control(name='service', type='text', placeholder='Click on a logo', disabled)
             .row
               .col-md
                 .form-group
