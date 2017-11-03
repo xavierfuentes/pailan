@@ -43,6 +43,7 @@ exports.addService = (req, res, next) => {
       owner: req.user.id,
       user: req.body.user,
       password: req.body.password,
+      active: true,
     });
 
     service.save((err) => {
