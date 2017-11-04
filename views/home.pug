@@ -1,27 +1,217 @@
-extends layout
+extends base
 
 block content
-  h1 Pailan
-  p.lead All your invoices in one place
-  //- hr
-  //- .row
-  //-   .col-sm-6
-  //-     h2 Heading
-  //-     p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-  //-     p
-  //-       a.btn.btn-default(href='#', role='button') View details »
-  //-   .col-sm-6
-  //-     h2 Heading
-  //-     p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-  //-     p
-  //-       a.btn.btn-default(href='#', role='button') View details »
-  //-   .col-sm-6
-  //-     h2 Heading
-  //-     p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-  //-     p
-  //-       a.btn.btn-default(href='#', role='button') View details »
-  //-   .col-sm-6
-  //-     h2 Heading
-  //-     p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-  //-     p
-  //-       a.btn.btn-default(href='#', role='button') View details »
+  include partials/header
+
+  section#home.bg-home
+    .bg-overlay
+    .home-center
+      .home-desc-center
+        .container
+          .row.justify-content-center
+            .col-lg-10.text-center
+              h6.home-title.text-white All your invoices in one place
+              p.pt-4.home-sub-title.text-white.mx-auto
+                | How much of your time is spent working on invoices?
+                br
+                | Stop wasting time. Invest it.
+
+  section#features.section
+    .container
+      .row.justify-content-center
+        .col-lg-6
+          .title.text-center
+            h2
+              | Our&nbsp
+              b Features
+            span.title-border
+              i.mdi.mdi-set-none
+      .row.mt-4.pt-4.vertical-content
+        .col-lg-6.mt-2
+          div
+            img.img-fluid.mx-auto.d-block(src='linexon/images/mockup1.png', alt='')
+        .col-lg-6.mt-2.text-center
+          .features-desc
+            h2 All your suppliers in one place
+            .features-border.mx-auto.mt-3
+            p.text-muted.mt-3
+              | Because your time is too valuable to lose it looking for hidden bills.
+
+      .row.mt-5.vertical-content
+        .col-lg-6.mt-2
+          .features-desc.text-center
+            h2 Keep your expenses under control
+            .features-border.mx-auto.mt-3
+            p.text-muted.mt-3
+              | Do not lose track of any of your active subscriptions and discover in real time your spending on suppliers.
+
+        .col-lg-6.mt-2
+          div
+            img.img-fluid.mx-auto.d-block(src='linexon/images/mockup2.png', alt='')
+
+  section.pt-5.pb-5.bg-custom
+    .container
+      .row
+        .col-md-9.text-white.critarea-desc.mt-3.mb-3
+          | How much of your time do you lose looking for invoices?
+        .col-md-3.mt-3.mb-3.text-md-right
+          a.btn.btn-outline-custom(href='/signup') Get it back!
+
+  section#service.section
+    .container
+      .row.justify-content-center
+        .col-lg-6
+          .title.text-center
+            h2
+              | Best&nbsp
+              b Services
+            span.title-border
+              i.mdi.mdi-set-none
+      .row.pt-4.mt-4
+        .col-lg-4.mt-3
+          .service-box.clearfix.p-4
+            .service-icon.service-left
+              i.mbri-photos
+            .service-desc.service-left
+              h4 Less is more
+              p.text-muted.mb-0
+                | With our super simple interface you will only have to know what services you use and your credentials. We take care of the rest of the rest.
+        .col-lg-4.mt-3
+          .service-box.clearfix.p-4
+            .service-icon.service-left
+              i.mbri-download
+            .service-desc.service-left
+              h4 Everything where should be
+              p.text-muted.mb-0
+                | Use Pailan.io as your invoice repository and backup, there is no limit. We take care of your invoices for you.
+        .col-lg-4.mt-3
+          .service-box.clearfix.p-4
+            .service-icon.service-left
+              i.mbri-growing-chart
+            .service-desc.service-left
+              h4 Without surprises
+              p.text-muted.mb-0
+                | Our graphics and alerts (coming soon) will keep you informed of excess consumption or erroneous charges from your suppliers.
+
+  section#pricing.section.bg-light
+    .container
+      .row.justify-content-center
+        .col-lg-6
+          .title.text-center
+            h2
+              | Our&nbsp
+              b Pricing
+            span.title-border
+              i.mdi.mdi-set-none
+      .row.mt-4.pt-4
+        .col-lg-4.mt-3
+          .pricing-box.bg-white.text-center.p-4
+            .plan-title.mt-3.mb-4
+              h5.mb-0 Freelance
+            .plan-price
+              h6
+                | £0
+                span /m
+            .plan-features.mt-4.mb-4
+              p Providers: 3
+              p Online space: 100MB
+              p -
+              p.mb-0 -
+            .mb-4
+              a.btn.btn-custom(href='/signup') Join Now
+        .col-lg-4.mt-3
+          .pricing-box.bg-white.text-center.p-4
+            .plan-title.mt-3.mb-4
+              h5.mb-0 Business
+            .plan-price
+              h6
+                | £29
+                span /m
+            .plan-features.mt-4.mb-4
+              p Providers: Unlimited
+              p Online space: Unlimited
+              p Alerts (coming soon)
+              p.mb-0 -
+            .mb-4
+              a.btn.btn-custom(href='/signup') Join Now
+        .col-lg-4.mt-3
+          .pricing-box.bg-white.text-center.p-4
+            .plan-title.mt-3.mb-4
+              h5.mb-0 Custom
+            .plan-price
+              h6
+                |
+            .plan-features.mt-4.mb-4
+              p Providers: Unlimited
+              p Online space: Unlimited
+              p Alerts (coming soon)
+              p.mb-0 On Premise
+            .mb-4
+              a.btn.btn-custom(href='#') Contact us
+
+  section#contact.section
+    .container
+      .row.justify-content-center
+        .col-lg-6
+          .title.text-center
+            h2
+              | Get In&nbsp
+              b Touch
+            span.title-border
+              i.mdi.mdi-set-none
+      .custom-form.mt-4.pt-4
+        #message
+        form#contact-form(method='post', action='php/contact.php', name='contact-form')
+          .row
+            .col-md-4
+              .form-group
+                label(for='name') Name
+                input#name.form-control(name='name', type='text', placeholder='Your name...')
+            .col-md-4
+              .form-group
+                label(for='email') Email address
+                input#email.form-control(name='email', type='email', placeholder='Your email...')
+            .col-md-4
+              .form-group
+                label(for='subject') Subject
+                input#subject.form-control(type='text', placeholder='Your Subject..')
+          .row
+            .col-md-12
+              .form-group
+                label(for='comments') Message
+                textarea#comments.form-control(name='comments', rows='4', placeholder='Your message...')
+          .row
+            .col-sm-12.text-right
+              input#submit.submitBnt.btn.btn-primary.btn-custom(type='submit', name='send', value='Send Message')
+              #simple-msg
+
+  section.section.bg-light
+    .container
+      .row
+        .col-lg-3
+        .col-lg-2
+          p.text-uppercase.footer-title about Pailan.io
+          ul.list-unstyled.company-sub-menu
+            li
+              a(href='#') About Us
+            li
+              a(href='#') Term
+            li
+              a(href='#') Privacy
+        .col-lg-2
+        .col-lg-2
+        .col-lg-3
+          p.text-uppercase.footer-title Contact Us
+          .contact-us
+            p support@pailan.io
+          ul.footer-icons.list-inline.mt-4
+            li.list-inline-item
+              a(href='#')
+                i.mdi.mdi-facebook
+            li.list-inline-item
+              a(href='#')
+                i.mdi.mdi-twitter
+            li.list-inline-item
+              a(href='#')
+                i.mdi.mdi-linkedin
+  include partials/footer

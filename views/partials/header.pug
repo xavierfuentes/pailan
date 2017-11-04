@@ -1,37 +1,31 @@
-.navbar.navbar-default.navbar-fixed-top
+header#topnav.defaultscroll.fixed-top.sticky(class=(title !== 'Home') ? 'navbar-light' : undefined)
   .container
-    .navbar-header
-      button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
-        span.sr-only Toggle navigation
-        span.icon-bar
-        span.icon-bar
-        span.icon-bar
-      a.navbar-brand(href='/')
-        i.fa.fa-cube
-        | Pailan
-    .collapse.navbar-collapse
-      if user
-        ul.nav.navbar-nav
-          li(class=(title === 'Services') ? 'active' : undefined)
-            a(href='/services') Services
-      ul.nav.navbar-nav.navbar-right
+    div
+      a.logo.text-uppercase(href='/')
+        img.logo-light(src='/linexon/images/logo-light.png', alt='', height='24')
+        img.logo-dark(src='/linexon/images/logo-dark.png', alt='', height='24')
+
+    .menu-extras
+      .menu-item
+        a.navbar-toggle
+          .lines
+            span
+            span
+            span
+
+    #navigation
+      ul.navigation-menu
         if !user
-          li(class=(title === 'Login') ? 'active' : undefined)
-            a(href='/login') Signin
-          li(class=(title === 'Create Account') ? 'active' : undefined)
+          li
+            a(href='/signin') Signin
+          li
             a(href='/signup') Signup
         else
-          li.dropdown(class=(title === 'Account Management') ? 'active' : undefined)
-            a.dropdown-toggle(href='#', data-toggle='dropdown')
-              if user.profile.picture
-                img(src=user.profile.picture)
-              else
-                img(src=user.gravatar(60))
-              span= user.profile.name || user.email || user.id
-              i.caret
-            ul.dropdown-menu
-              li
-                a(href='/account') My Account
-              li.divider
-              li
-                a(href='/logout') Logout
+          li
+            a(href='/account') Hi #{user.profile && user.profile.name || user.email}
+          li(class=(title === 'Services') ? 'active' : undefined)
+            a(href='/services') My Services
+          li(class=(title === 'Add Service') ? 'active' : undefined)
+            a(href='/services/add') Add Service
+          li
+            a(href='/signout') Signout

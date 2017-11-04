@@ -1,24 +1,39 @@
-extends ../layout
+extends ../base
 
 block content
-  .page-header
-    h3 Sign up
-  form.form-horizontal(id='signup-form', method='POST')
-    input(type='hidden', name='_csrf', value=_csrf)
-    .form-group
-      label.col-sm-3.control-label(for='email') Email
-      .col-sm-7
-        input.form-control(type='email', name='email', id='email', placeholder='Email', autofocus, required)
-    .form-group
-      label.col-sm-3.control-label(for='password') Password
-      .col-sm-7
-        input.form-control(type='password', name='password', id='password', placeholder='Password', required)
-    .form-group
-      label.col-sm-3.control-label(for='confirmPassword') Confirm Password
-      .col-sm-7
-        input.form-control(type='password', name='confirmPassword', id='confirmPassword', placeholder='Confirm Password', required)
-    .form-group
-      .col-sm-offset-3.col-sm-7
-        button.btn.btn-success(type='submit')
-          i.fa.fa-user-plus
-          | Signup
+  section#signup.section
+    .container
+      .row.justify-content-center
+        .col-lg-6
+          .title.text-center
+            h2
+              | Sign&nbsp
+              b Up
+            span.title-border
+              i.mdi.mdi-set-none
+      .custom-form.mt-4.pt-4
+        #message
+        form#signup-form(method='post', name='signup-form')
+          input(type='hidden', name='_csrf', value=_csrf)
+          .row.justify-content-center
+            .col-lg-4
+              include ../partials/flash
+          .row
+            .col-md-4.offset-md-4
+              .form-group
+                label(for='email') Email address
+                input#email.form-control(name='email', type='email', placeholder='Your email...', required, autofocus)
+          .row
+            .col-md-4.offset-md-4
+              .form-group
+                label(for='password') Password
+                input#password.form-control(name='password', type='password', placeholder='Your password...', required)
+          .row
+            .col-md-4.offset-md-4
+              .form-group
+                label(for='confirmPassword') Password
+                input#confirmPassword.form-control(name='confirmPassword', type='password', placeholder='Confirm your password...', required)
+          .row
+            .col-md-4.offset-md-4
+              button#submit.submitBnt.btn.btn-primary.btn-custom.btn-block(type='submit') Sign Up
+              #simple-msg

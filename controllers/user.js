@@ -5,23 +5,23 @@ const passport = require('passport');
 const User = require('../models/User');
 
 /**
- * GET /login
- * Login page.
+ * GET /signin
+ * Signin page.
  */
-exports.getLogin = (req, res) => {
+exports.getSignin = (req, res) => {
   if (req.user) {
     return res.redirect('/services');
   }
-  res.render('account/login', {
-    title: 'Login',
+  res.render('account/signin', {
+    title: 'Sign in',
   });
 };
 
 /**
- * POST /login
+ * POST /signin
  * Sign in using email and password.
  */
-exports.postLogin = (req, res, next) => {
+exports.postSignin = (req, res, next) => {
   req.assert('email', 'Email is not valid').isEmail();
   req.assert('password', 'Password cannot be blank').notEmpty();
   req.sanitize('email').normalizeEmail({ gmail_remove_dots: false });
@@ -30,7 +30,7 @@ exports.postLogin = (req, res, next) => {
 
   if (errors) {
     req.flash('errors', errors);
-    return res.redirect('/login');
+    return res.redirect('/signin');
   }
 
   passport.authenticate('local', (err, user, info) => {
@@ -39,7 +39,7 @@ exports.postLogin = (req, res, next) => {
     }
     if (!user) {
       req.flash('errors', info);
-      return res.redirect('/login');
+      return res.redirect('/signin');
     }
     req.logIn(user, err => {
       if (err) {
@@ -52,10 +52,10 @@ exports.postLogin = (req, res, next) => {
 };
 
 /**
- * GET /logout
+ * GET /signout
  * Log out.
  */
-exports.logout = (req, res) => {
+exports.signout = (req, res) => {
   req.logout();
   res.redirect('/');
 };
@@ -69,7 +69,7 @@ exports.getSignup = (req, res) => {
     return res.redirect('/');
   }
   res.render('account/signup', {
-    title: 'Create Account',
+    title: 'Sign up',
   });
 };
 
@@ -383,8 +383,8 @@ exports.postForgot = (req, res, next) => {
     });
     const mailOptions = {
       to: user.email,
-      from: 'hackathon@starter.com',
-      subject: 'Reset your password on Hackathon Starter',
+      from: 'no-reply@pailan.io',
+      subject: 'Reset your password on Pailan.io',
       text: `You are receiving this email because you (or someone else) have requested the reset of the password for your account.\n\n
         Please click on the following link, or paste this into your browser to complete the process:\n\n
         http://${req.headers.host}/reset/${token}\n\n

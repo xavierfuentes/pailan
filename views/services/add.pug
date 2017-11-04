@@ -1,27 +1,44 @@
 extends ../layout
 
-block content
-  .page-header
-    h3 All Services
+block main
+  section#add-service.section
+    .container
+      .row.justify-content-center.mt-5
+        .col-lg-6
+          .title.text-center
+            h2
+              | Add&nbsp
+              b Service
+            span.title-border
+              i.mdi.mdi-set-none
 
-  h3 Add Service
-  form.add-service-form.form-horizontal(method='POST')
-    input(type='hidden', name='_csrf', value=_csrf)
-    input(type='hidden', name='selectedServiceId', id='selectedServiceId')
-    .form-group
-      label.col-sm-3.control-label(for='user') User
-      .col-sm-7
-        input.form-control(type='text', name='user', id='user', placeholder='User', required)
-    .form-group
-      label.col-sm-3.control-label(for='password') Password
-      .col-sm-7
-        input.form-control(type='password', name='password', id='password', placeholder='Password', required)
-    .form-group
-      .col-sm-offset-3.col-sm-7
-        button.add-service-button.col-sm-3.btn.btn-primary(type='submit')
-          | Add Service
-    for service in services
-      .form-check
-        label.form-check-label
-          input.services-list-radio.form-check-input(type='radio', name='serviceRadio', value=service.id, required)
-          | &nbsp;#{service.name}
+      form#add-service-form(method='post', name='add-service-form')
+        input(type='hidden', name='_csrf', value=_csrf)
+        input(type='hidden', name='selectedServiceId', id='selectedServiceId')
+        .row.mt-4.pt-4
+          .col-lg-8
+            .row
+              for service in services
+                .col-2.mt-3
+                  .default-service-box(data-id=service.id, data-name=service.name)
+                    img.service-logo.mx-auto.d-block.img-fluid(src=service.logo, alt=service.name)
+
+          .col-lg-3.offset-md-1.mt-3
+            .row
+              .col-md
+                .form-group
+                  label(for='service') Service
+                  input#service.form-control(name='service', type='text', placeholder='Click on a logo', disabled)
+            .row
+              .col-md
+                .form-group
+                  label(for='user') User name
+                  input#user.form-control(name='user', type='text', placeholder='Your user name...', required, disabled)
+            .row
+              .col-md
+                .form-group
+                  label(for='password') Password
+                  input#password.form-control(name='password', type='password', placeholder='Your password...', required, disabled)
+            .row
+              .col-md
+                input#add-service-button.submitBnt.btn.btn-primary.btn-custom.btn-block(type='submit', value='Add Service')

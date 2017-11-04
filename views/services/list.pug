@@ -1,10 +1,29 @@
 extends ../layout
 
-block content
-  .page-header
-    a(href='/services/add') Add Service
-    h3 All Services
-    ul
-      for service in services
-        li.service-card
-          span.service-name=service.name
+block main
+  section#services-list.section
+    .container
+      .row.justify-content-center.mt-5
+        .col-lg-6
+          .title.text-center
+            h2
+              | All&nbsp
+              b Services
+            span.title-border
+              i.mdi.mdi-set-none
+
+      .row.mt-4.pt-4
+        .col-lg-8
+          for service in services
+            .row.default-service-row.mt-3.mb-3(data-id=service.id, data-name=service.name)
+              .col-2.text-center
+                img.service-logo.img-fluid(src=service.logo, alt=service.name)
+              .col-5
+                span #{service.name}
+              .col-3
+                if service.active
+                  span.badge.badge-success active
+                else
+                  span.badge.badge-danger error
+              //- .col-2.text-center
+              //-   button.edit-service-button.btn.btn-secondary Edit

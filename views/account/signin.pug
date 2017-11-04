@@ -1,0 +1,37 @@
+extends ../base
+
+block content
+  section#signin.section
+    .container
+      .row.justify-content-center
+        .col-lg-6
+          .title.text-center
+            h2
+              | Sign&nbsp
+              b In
+            span.title-border
+              i.mdi.mdi-set-none
+      .custom-form.mt-4.pt-4
+        #message
+        form#signin-form(method='post', name='signin-form')
+          input(type='hidden', name='_csrf', value=_csrf)
+          .row.justify-content-center
+            .col-lg-4
+              include ../partials/flash
+          .row
+            .col-md-4.offset-md-4
+              .form-group
+                label(for='email') Email address
+                input#email.form-control(name='email', type='email', placeholder='Your email...', required, autofocus)
+          .row
+            .col-md-4.offset-md-4
+              .form-group
+                label(for='password') Password
+                input#password.form-control(name='password', type='password', placeholder='Your password...', required)
+          .row
+            .col-md-4.offset-md-4
+              button#submit.submitBnt.btn.btn-primary.btn-custom.btn-block(type='submit') Sign In
+              #simple-msg
+          .row
+            .col-md-4.offset-md-4.text-center
+              a.forgot-link(href='/forgot') Forgot your password?
