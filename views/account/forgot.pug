@@ -11,9 +11,6 @@ block content
               b Password
             span.title-border
               i.mdi.mdi-set-none
-      .row.justify-content-center.mt-4.pt-4
-        .col-lg-4
-          include ../partials/flash
       .custom-form.mt-4.pt-4
         #message
         form#forgot-form(method='post', name='forgot-form')
@@ -27,7 +24,7 @@ block content
           .row
             .col-md-4.offset-md-4
               .form-group
-                input#email.form-control(name='email', type='text', placeholder='Your email...', required, autofocus)
+                input#email.form-control(name='email', type='email', placeholder='Your email...', required, autofocus)
           .row
             .col-md-4.offset-md-4
               button#submit.submitBnt.btn.btn-primary.btn-custom.btn-block(type='submit') Reset Password
