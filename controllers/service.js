@@ -10,6 +10,10 @@ exports.getActiveServices = (req, res) => {
   Service.find()
     .allPrivateByUser(req.user.id)
     .exec((err, services) => {
+      if (services.length === 0) {
+        return res.redirect('/services/add');
+      }
+
       res.render('services/list', { title: 'Services', services });
     });
 };
