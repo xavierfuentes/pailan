@@ -12,8 +12,7 @@ const serviceSchema = new Schema(
     owner: { type: Schema.Types.ObjectId, index: true, default: undefined },
     user: String,
     password: String,
-    active: Boolean,
-    // invoices: [{ type: Schema.Types.ObjectId, ref: 'Invoice' }]
+    invoices: [{ type: Schema.Types.ObjectId, ref: 'Invoice' }]
   },
   { timestamps: true },
 );
