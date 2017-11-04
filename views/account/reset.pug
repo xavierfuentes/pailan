@@ -1,17 +1,37 @@
-extends ../layout
+extends ../base
 
 block content
-  .col-sm-8.col-sm-offset-2
-    form(method='POST')
-      legend Reset Password
-      input(type='hidden', name='_csrf', value=_csrf)
-      .form-group
-        label(for='password') New Password
-        input.form-control(type='password', name='password', id='password', placeholder='New password', autofocus, required)
-      .form-group
-        label(for='confirm') Confirm Password
-        input.form-control(type='password', name='confirm', id='confirm', placeholder='Confirm password', required)
-      .form-group
-        button.btn.btn-primary.btn-reset(type='submit')
-          i.fa.fa-keyboard-o
-          | Change Password
+  section#signin.section
+    .container
+      .row.justify-content-center
+        .col-lg-6
+          .title.text-center
+            h2
+              | Reset&nbsp
+              b Password
+            span.title-border
+              i.mdi.mdi-set-none
+      .row.justify-content-center
+        .col-lg-4
+          include ../partials/flash
+      .custom-form.mt-4.pt-4
+        #message
+        form#signin-form(method='post', name='signin-form')
+          input(type='hidden', name='_csrf', value=_csrf)
+          .row.justify-content-center
+            .col-lg-4
+              include ../partials/flash
+          .row
+            .col-md-4.offset-md-4
+              .form-group
+                label(for='password') New Password
+                input#password.form-control(name='password', type='password', placeholder='New password...', autofocus, required)
+          .row
+            .col-md-4.offset-md-4
+              .form-group
+                label(for='confirm') Confirm Password
+                input#password.form-control(name='confirm', type='password', placeholder='Confirm password...', required)
+          .row
+            .col-md-4.offset-md-4
+              button#submit.submitBnt.btn.btn-primary.btn-custom.btn-block(type='submit') Change Password
+              #simple-msg

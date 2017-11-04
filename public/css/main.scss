@@ -2,6 +2,22 @@
     background-image: url('/images/cabecera.jpeg');
 }
 
+a {
+  color: #808080;
+  font-size: 14px;
+  margin-bottom: 7px;
+  display: inline-block;
+  transition: all 0.5s;
+
+  &:hover {
+    color: #615fe6;
+  }
+}
+
+button {
+  &:hover { cursor: pointer }
+}
+
 #topnav {
   &.navbar-light {
     .logo-light {

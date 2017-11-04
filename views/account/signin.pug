@@ -15,6 +15,9 @@ block content
         #message
         form#signin-form(method='post', name='signin-form')
           input(type='hidden', name='_csrf', value=_csrf)
+          .row.justify-content-center
+            .col-lg-4
+              include ../partials/flash
           .row
             .col-md-4.offset-md-4
               .form-group
@@ -29,3 +32,6 @@ block content
             .col-md-4.offset-md-4
               button#submit.submitBnt.btn.btn-primary.btn-custom.btn-block(type='submit') Sign In
               #simple-msg
+          .row
+            .col-md-4.offset-md-4.text-center
+              a.forgot-link(href='/forgot') Forgot your password?

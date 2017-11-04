@@ -15,6 +15,9 @@ block content
         #message
         form#signup-form(method='post', name='signup-form')
           input(type='hidden', name='_csrf', value=_csrf)
+          .row.justify-content-center
+            .col-lg-4
+              include ../partials/flash
           .row
             .col-md-4.offset-md-4
               .form-group
