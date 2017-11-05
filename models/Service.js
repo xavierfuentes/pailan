@@ -1,5 +1,6 @@
 const encrypt = require('../lib/encription').encrypt;
 const mongoose = require('mongoose');
+const mongoosePaginate = require('mongoose-paginate');
 
 const Schema = mongoose.Schema;
 
@@ -17,6 +18,8 @@ const serviceSchema = new Schema(
   },
   { timestamps: true },
 );
+
+serviceSchema.plugin(mongoosePaginate);
 
 serviceSchema.pre('save', function save(next) {
   const service = this;

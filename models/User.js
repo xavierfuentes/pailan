@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt-nodejs');
 const crypto = require('crypto');
 const mongoose = require('mongoose');
+const mongoosePaginate = require('mongoose-paginate');
 
 const userSchema = new mongoose.Schema(
   {
@@ -30,6 +31,8 @@ const userSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+userSchema.plugin(mongoosePaginate);
 
 /**
  * Password hash middleware.
