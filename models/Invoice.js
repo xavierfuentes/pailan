@@ -8,6 +8,7 @@ const invoiceSchema = new Schema(
     service: { type: Schema.Types.ObjectId, index: true, default: undefined },
     date: Date,
     amount: Number,
+    currency: String,
     // file: { data: Buffer, contentType: String },
   },
   { timestamps: true },
