@@ -9,13 +9,13 @@ $(function() {
   var serviceIdInput = $('input#selectedServiceId');
   var AddServiceButton = $('#add-service-button');
   var ServiceLogos = $('#add-service').find('.default-service-box');
+  var ServiceRows = $('#services-list').find('.default-service-row');
   var UserInput = $('#user');
   var PasswordInput = $('#password');
   var ServiceInput = $('#service');
 
   // Events
   ServiceLogos.click(function(event) {
-    console.log($(this))
     // put the id in the hidden input
     serviceSelectedId = $(this).data('id');
     serviceIdInput.val(serviceSelectedId);
@@ -30,6 +30,5 @@ $(function() {
     // toggles active class
     ServiceLogos.removeClass('active');
     $(this).addClass('active');
-  })
-
+  });
 });

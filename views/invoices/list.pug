@@ -1,0 +1,24 @@
+extends ../layout
+
+block main
+  section#invoices-list.section
+    .container
+      .row.justify-content-center.mt-5
+        .col-lg-6
+          .title.text-center
+            h2
+              | All&nbsp
+              b Invoices
+            span.title-border
+              i.mdi.mdi-set-none
+
+      .row.mt-4.pt-4
+        .col-lg-8
+          for invoice in invoices
+            .row.default-invoice-row.mt-3.mb-3
+              .col-3
+                Date
+              .col-7
+                Amount
+              .col-2
+                Link

@@ -15,7 +15,7 @@ block main
       .row.mt-4.pt-4
         .col-lg-8
           for service in services
-            .row.default-service-row.mt-3.mb-3(data-id=service.id, data-name=service.name)
+            a.row.default-service-row.mt-3.mb-3(data-id=service.id, data-name=service.name, href='/services/' + service.id)
               .col-2.text-center
                 img.service-logo.img-fluid(src=service.logo, alt=service.name)
               .col-5
