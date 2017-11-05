@@ -10,10 +10,10 @@ html(lang='en')
     link(rel='shortcut icon', href='img/favicon.png')
     title Pailan Admin
     // Icons
-    link(href='coreui/node_modules/font-awesome/css/font-awesome.min.css', rel='stylesheet')
-    link(href='coreui/node_modules/simple-line-icons/css/simple-line-icons.css', rel='stylesheet')
+    link(href='/coreui/node_modules/font-awesome/css/font-awesome.min.css', rel='stylesheet')
+    link(href='/coreui/node_modules/simple-line-icons/css/simple-line-icons.css', rel='stylesheet')
     // Main styles for this application
-    link(href='coreui/css/style.css', rel='stylesheet')
+    link(href='/coreui/css/style.css', rel='stylesheet')
 
   body.app.header-fixed.sidebar-fixed.aside-menu-fixed.aside-menu-hidden
     header.app-header.navbar
@@ -31,9 +31,9 @@ html(lang='en')
                 i.icon-speedometer
                 |  Dashboard
             li.nav-item
-              a.nav-link(href='index.html')
-                i.icon-speedometer
-                |  Dashboard
+              a.nav-link(href='/admin/users')
+                i.icon-user
+                |  Users
                 //- span.badge.badge-primary NEW
         button.sidebar-minimizer.brand-minimizer(type='button')
       // Main content
@@ -49,12 +49,12 @@ html(lang='en')
         | Powered by
         a(href='http://pailan.io') Pailan
     // Bootstrap and necessary plugins
-    script(src='coreui/node_modules/jquery/dist/jquery.min.js')
-    script(src='coreui/node_modules/popper.js/dist/umd/popper.min.js')
-    script(src='coreui/node_modules/bootstrap/dist/js/bootstrap.min.js')
-    script(src='coreui/node_modules/pace-progress/pace.min.js')
+    script(src='/coreui/node_modules/jquery/dist/jquery.min.js')
+    script(src='/coreui/node_modules/popper.js/dist/umd/popper.min.js')
+    script(src='/coreui/node_modules/bootstrap/dist/js/bootstrap.min.js')
+    script(src='/coreui/node_modules/pace-progress/pace.min.js')
     // CoreUI main scripts
-    script(src='coreui/js/app.js')
+    script(src='/coreui/js/app.js')
     // Plugins and scripts required by this views
     // Custom scripts required by this view
-    //- script(src='coreui/js/views/main.js')
+    //- script(src='/coreui/js/views/main.js')

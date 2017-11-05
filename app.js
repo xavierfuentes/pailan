@@ -143,7 +143,8 @@ app.post('/account/password', passportConfig.isAuthenticated, userController.pos
 app.post('/account/delete', passportConfig.isAuthenticated, userController.postDeleteAccount);
 app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userController.getOauthUnlink);
 
-app.get('/admin', passportConfig.isAuthenticated, passportConfig.isAdmin, adminController.index);
+app.get('/admin', passportConfig.isAuthenticated, adminController.index);
+app.get('/admin/users', passportConfig.isAuthenticated, adminController.getUsers);
 
 app.get('/services', passportConfig.isAuthenticated, serviceController.getActiveServices);
 app.get('/services/add', passportConfig.isAuthenticated, serviceController.getServicesAvailable);

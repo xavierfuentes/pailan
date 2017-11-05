@@ -1,0 +1,9 @@
+extends base
+
+block main
+  div.list-group.mt-4
+    for user in users
+      a(href='#').list-group-item.list-group-item-action.d-flex.justify-content-between.align-items-center
+        span #{user._id}
+        span #{user.email}
+        span.badge.badge-primary.badge-pill #{user.services.length}
