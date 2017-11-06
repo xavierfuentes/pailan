@@ -12,8 +12,9 @@ exports.index = (req, res) => {
  * GET users list
  */
 exports.getUsers = (req, res) => {
-  // User.find({})
-  User.paginate({}, {
+  const query = {};
+  // User.find(query)
+  User.paginate(query, {
     page: req.query.hasOwnProperty('page') ? +req.query.page : 1,
     limit: req.query.hasOwnProperty('limit') ? +req.query.limit : 20,
     select: '_id email services', // we're not populating services, only a list of ids
