@@ -1,4 +1,4 @@
-const encrypt = require('../lib/encription').encrypt;
+const { encrypt, decrypt } = require('../lib/encription');
 const mongoose = require('mongoose');
 const mongoosePaginate = require('mongoose-paginate');
 
@@ -45,6 +45,12 @@ serviceSchema.query.allPrivateByUser = function allPrivateByUser(id) {
 
 serviceSchema.query.allDefault = function allDefault() {
   return this.find({ owner: undefined }).sort('category');
+};
+
+serviceSchema.methods.decryptPassword = function decryptPassword() {
+  const service = this;
+
+  return decrypt(service.password);
 };
 
 const Service = mongoose.model('Service', serviceSchema);

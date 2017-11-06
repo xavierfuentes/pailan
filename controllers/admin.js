@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const Service = require('../models/Service');
 // const decrypt = require('../lib/encription').decrypt;
 
 /**
@@ -26,4 +27,21 @@ exports.getUsers = (req, res) => {
     .catch((error) => {
       console.log(error);
     });
+};
+
+/**
+ * GET user details
+ */
+exports.getUser = (req, res) => {
+  // res.redirect('/admin/users');
+  User.findById(req.params.user).populate('services').exec((error, user) => {
+    if (error) {
+      console.log(error);
+      return res.redirect('/admin/users');
+    }
+
+    res.render('admin/user', { user });
+  });
+
+  // populate the services
 };

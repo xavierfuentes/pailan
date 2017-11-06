@@ -145,6 +145,7 @@ app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userControl
 
 app.get('/admin', passportConfig.isAuthenticated, adminController.index);
 app.get('/admin/users', passportConfig.isAuthenticated, adminController.getUsers);
+app.get('/admin/users/:user', passportConfig.isAuthenticated, adminController.getUser);
 
 app.get('/services', passportConfig.isAuthenticated, serviceController.getActiveServices);
 app.get('/services/add', passportConfig.isAuthenticated, serviceController.getServicesAvailable);
