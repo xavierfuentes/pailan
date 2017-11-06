@@ -1,15 +1,19 @@
 if pages > 1
-  nav.mt-4(aria-label='Page navigation example')
+  nav(aria-label='Pagination')
     - var n = 1;
-    ul.pagination.justify-content-center
+    ul.pagination.justify-content-center.mb-0
       if page === 1
         li.page-item.disabled
-          a.page-link(href='#', tabindex='-1') Previous
+          a.page-link(href='#', tabindex='-1', aria-label='Previous')
+            span(aria-hidden='true') &laquo;
+            span.sr-only Previous
       else
         li.page-item
-          a.page-link(href='#') Previous
+          a.page-link(href='#', aria-label='Previous')
+            span(aria-hidden='true') &laquo;
+            span.sr-only Previous
 
-      while n <= 4
+      while n <= pages
         if page === n
           li.page-item.disabled
             a.page-link(href='#', tabindex='-1')= n++
@@ -19,7 +23,11 @@ if pages > 1
 
       if page === pages
         li.page-item.disabled
-          a.page-link(href='#', tabindex='-1') Next
+          a.page-link(href='#', tabindex='-1', aria-label='Next')
+            span(aria-hidden='true') &raquo;
+            span.sr-only Next
       else
         li.page-item
-          a.page-link(href='#') Next
+          a.page-link(href='#', aria-label='Next')
+            span(aria-hidden='true') &raquo;
+            span.sr-only Next

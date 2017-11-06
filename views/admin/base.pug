@@ -42,12 +42,13 @@ html(lang='en')
           block main
         // /.conainer-fluid
     footer.app-footer
-      span
-        a(href='http://pailan.io') Pailan
-        |  © 2017 Pailan.
-      span.ml-auto
-        | Powered by
-        a(href='http://pailan.io') Pailan
+      include ../partials/pagination
+      //- span
+      //-   a(href='http://pailan.io') Pailan
+      //-   |  © 2017 Pailan.
+      //- span.ml-auto
+      //-   | Powered by
+      //-   a(href='http://pailan.io') Pailan
     // Bootstrap and necessary plugins
     script(src='/coreui/node_modules/jquery/dist/jquery.min.js')
     script(src='/coreui/node_modules/popper.js/dist/umd/popper.min.js')
