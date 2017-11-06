@@ -37,7 +37,7 @@ exports.addService = (req, res, next) => {
 
     const service = new Service({
       name: serviceTemplate.name,
-      url: req.body.url,
+      url: serviceTemplate.url,
       logo: serviceTemplate.logo,
       category: serviceTemplate.category,
       owner: req.user.id,
