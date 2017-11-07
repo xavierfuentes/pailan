@@ -12,11 +12,15 @@ block main
           strong Profile&nbsp;
           small.text-muted Form
         .card-block
-          form(action='/admin/users/' + user.id, method='POST')
+          form(action='/admin/users/' + user.id + '/profile', method='POST')
             input(type='hidden', name='_csrf', value=_csrf)
             .form-group
-              label
-              input
+              label(for='email') Email address
+              input.form-control(name='email', type='email', placeholder='User\'s email', value=user.email)
+            .form-group
+              label(for='name') Name
+              input.form-control(name='name', placeholder='User\'s name', value=user.profile.name)
+            button.btn.btn-primary(type='submit') Save Profile
 
     // form to change the user's password
     .col-sm-6
@@ -25,13 +29,14 @@ block main
           strong Password&nbsp;
           small.text-muted Form
         .card-block
-          form(action='/admin/users/' + user.id, method='POST')
+          form(action='/admin/users/' + user.id + '/password', method='POST')
             input(type='hidden', name='_csrf', value=_csrf)
             .form-group
-              label
-              input
+              label(for='password') Reset Password
+              input.form-control(name='password', type='text', placeholder='New password')
+            button.btn.btn-primary(type='submit') Save Password
 
-  .row
+  .row.mb-4
     .col-sm-12
       .h3 Services
       // list the services
@@ -50,4 +55,4 @@ block main
                   span.badge.badge-success.mr-4 active
                 else
                   span.badge.badge-danger.mr-4 inactive
-                a.btn.btn-primary(href='/admin/users/' + user.id + '/services/' + service.id, role='button') Edit
+                a.btn.btn-primary.btn-sm(href='/admin/users/' + user.id + '/services/' + service.id, role='button') Edit
