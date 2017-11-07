@@ -45,3 +45,36 @@ exports.getUser = (req, res) => {
 
   // populate the services
 };
+
+/**
+ * POST user profile
+ */
+exports.postUserProfile = (req, res, next) => {
+  User.findById(req.params.user, (findError, user) => {
+    if (findError) { return next(findError); }
+
+    user.email = req.body.email;
+    user.profile.name = req.body.name;
+    user.save((saveError) => {
+      if (saveError) { return next(saveError); }
+
+      res.redirect(`/admin/users/${req.params.user}`);
+    });
+  });
+};
+
+/**
+ * POST user account
+ */
+exports.postUserAccount = (req, res, next) => {
+  User.findById(req.params.user, (findError, user) => {
+    if (findError) { return next(findError); }
+
+    user.password = req.body.password;
+    user.save((saveError) => {
+      if (saveError) { return next(saveError); }
+
+      res.redirect(`/admin/users/${req.params.user}`);
+    });
+  });
+};
