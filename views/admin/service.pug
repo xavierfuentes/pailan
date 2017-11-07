@@ -1,0 +1,51 @@
+extends base
+
+block main
+  .row.mt-2
+    .col-sm-12
+      .h3
+        | #{user.email}&nbsp;
+        small.text-muted #{service.name}
+  .row
+    .col-sm-6
+      .card
+        .card-header
+          strong Service&nbsp;
+          small.text-muted Form
+        .card-block
+          form(action='/admin/users/' + user.id + '/services/' + service.id, method='POST')
+            input(type='hidden', name='_csrf', value=_csrf)
+            .form-group
+              label(for='user') User
+              input.form-control(name='user', type='text', placeholder='User name', value=service.user)
+            .form-group
+              label(for='password') Password
+              input.form-control(name='password', placeholder='User\'s name', value=service.decryptPassword())
+            button.btn.btn-primary(type='submit') Save Access Data
+    .col-sm-6
+      .card
+        .card-header
+          strong Invoices&nbsp;
+          small.text-muted Form
+        .card-block
+
+  .row.mb-4
+    .col-sm-12
+      .h3 Invoices
+      // list the services
+      .list-group
+        //- each service in user.services
+        //-   .list-group-item.list-group-item-action
+        //-     .row
+        //-       .col-sm-3
+        //-         a(href=service.url) #{service.name}
+        //-       .col-sm-3
+        //-         span #{service.user}
+        //-       .col-sm-4
+        //-         span #{service.decryptPassword()}
+        //-       .col-sm-2.text-right
+        //-         if service.active
+        //-           span.badge.badge-success.mr-4 active
+        //-         else
+        //-           span.badge.badge-danger.mr-4 inactive
+        //-         a.btn.btn-primary.btn-sm(href='/admin/users/' + user.id + '/services/' + service.id, role='button') Edit

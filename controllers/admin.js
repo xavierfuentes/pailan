@@ -42,8 +42,6 @@ exports.getUser = (req, res) => {
 
     res.render('admin/user', { user });
   });
-
-  // populate the services
 };
 
 /**
@@ -94,3 +92,35 @@ exports.postUserAdmin = (req, res, next) => {
     });
   });
 };
+
+/**
+ * GET user service
+ */
+exports.getUserService = (req, res, next) => {
+  Service.findById(req.params.service)
+    // .populate('invoices')
+    .exec((error, service) => {
+      if (error) { return res.redirect(`/admin/users/${req.params.user}`); }
+
+      User.findById(req.params.user, (findError, user) => {
+        res.render('admin/service', { service, user });
+      });
+    });
+};
+
+/**
+ * POST user service
+ */
+exports.postUserService = (req, res, next) => {
+  Service.findById(req.params.service, (findError, service) => {
+    if (findError) { return next(findError); }
+
+    service.user = req.body.user;
+    service.password = req.body.password;
+    service.save((saveError) => {
+      if (saveError) { return next(saveError); }
+
+      res.redirect(`/admin/users/${req.params.user}/services/${req.params.service}`);
+    })
+  });
+}
