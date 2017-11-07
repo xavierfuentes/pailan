@@ -6,6 +6,7 @@ const mongoosePaginate = require('mongoose-paginate');
 const userSchema = new mongoose.Schema(
   {
     email: { type: String, unique: true },
+    admin: { type: Boolean, default: false },
     password: String,
     passwordResetToken: String,
     passwordResetExpires: Date,

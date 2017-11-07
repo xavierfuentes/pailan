@@ -64,13 +64,29 @@ exports.postUserProfile = (req, res, next) => {
 };
 
 /**
- * POST user account
+ * POST user password
  */
-exports.postUserAccount = (req, res, next) => {
+exports.postUserPassword = (req, res, next) => {
   User.findById(req.params.user, (findError, user) => {
     if (findError) { return next(findError); }
 
     user.password = req.body.password;
+    user.save((saveError) => {
+      if (saveError) { return next(saveError); }
+
+      res.redirect(`/admin/users/${req.params.user}`);
+    });
+  });
+};
+
+/**
+ * POST user admin
+ */
+exports.postUserAdmin = (req, res, next) => {
+  User.findById(req.params.user, (findError, user) => {
+    if (findError) { return next(findError); }
+
+    user.admin = req.body.admin === 'true';
     user.save((saveError) => {
       if (saveError) { return next(saveError); }
 

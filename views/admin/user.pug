@@ -26,15 +26,40 @@ block main
     .col-sm-6
       .card
         .card-header
-          strong Password&nbsp;
+          strong Account&nbsp;
           small.text-muted Form
         .card-block
           form(action='/admin/users/' + user.id + '/password', method='POST')
             input(type='hidden', name='_csrf', value=_csrf)
-            .form-group
-              label(for='password') Reset Password
-              input.form-control(name='password', type='text', placeholder='New password')
-            button.btn.btn-primary(type='submit') Save Password
+            .form-row.align-items-center
+              .col-sm-8
+                label.sr-only(for='password') Reset Password
+                input.form-control.mb-2.mb-sm-0(name='password', type='text', placeholder='New password')
+              .col-auto.ml-auto
+                button.btn.btn-primary(type='submit') Save Password
+
+          form.mt-4(action='/admin/users/' + user.id + '/admin', method='POST')
+            input(type='hidden', name='_csrf', value=_csrf)
+            label Admin powers
+            .form-row.align-items-center
+              .col-auto
+                .form-check.form-check-inline
+                  label.form-check-label(for='admin')
+                    if user.admin
+                      input.form-check-input(type='radio', name='admin', value='true', checked)
+                    else
+                      input.form-check-input(type='radio', name='admin', value='true')
+                    | Yes
+                .form-check.form-check-inline
+                  label.form-check-label(for='admin')
+                    if user.admin
+                      input.form-check-input(type='radio', name='admin', value='false')
+                    else
+                      input.form-check-input(type='radio', name='admin', value='false', checked)
+                    | No
+                small.form-text.text-muted "With great power comes great responsibility" Uncle Ben.
+              .col-auto.ml-auto
+                button.btn.btn-primary(type='submit') Make Admin
 
   .row.mb-4
     .col-sm-12
