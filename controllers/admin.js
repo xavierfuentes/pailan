@@ -121,6 +121,38 @@ exports.postUserService = (req, res, next) => {
       if (saveError) { return next(saveError); }
 
       res.redirect(`/admin/users/${req.params.user}/services/${req.params.service}`);
-    })
+    });
   });
-}
+};
+
+/**
+ * GET default services
+ */
+exports.getDefaultServices = (req, res, next) => {
+  Service.find({ owner: undefined }, ['_id', 'name', 'url', 'logo', 'category'], { sort: { category: 'asc', name: 'asc' } })
+    .exec((error, services) => {
+      if (error) { return next(error); }
+
+      res.render('admin/services', { services });
+    });
+};
+
+/**
+ * POST default service
+ */
+exports.postDefaultService = (req, res, next) => {
+  const service = new Service({
+    name: req.body.name,
+    url: req.body.url,
+    logo: req.body.logo,
+    category: req.body.category
+  });
+
+  service.save((err) => {
+    if (err) {
+      return next(err);
+    }
+
+    res.redirect('/admin/services');
+  });
+};

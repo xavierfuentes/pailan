@@ -1,18 +1,15 @@
 extends base
 
 block main
-  .row.mt-2
-    .col-sm-12
-      .h3 User
-  .row
+  .row.mt-4
     // form to edit the user's profile
     .col-sm-6
       .card
         .card-header
-          strong Profile&nbsp;
+          strong User&nbsp;
           small.text-muted Form
         .card-block
-          form(action='/admin/users/' + user.id + '/profile', method='POST')
+          form(action='/admin/users/' + user.id + '/profile', method='POST').mb-4
             input(type='hidden', name='_csrf', value=_csrf)
             .form-group
               label(for='email') Email address
@@ -21,15 +18,7 @@ block main
               label(for='name') Name
               input.form-control(name='name', placeholder='User\'s name', value=user.profile.name)
             button.btn.btn-primary(type='submit') Save Profile
-
-    // form to change the user's password
-    .col-sm-6
-      .card
-        .card-header
-          strong Account&nbsp;
-          small.text-muted Form
-        .card-block
-          form(action='/admin/users/' + user.id + '/password', method='POST')
+          form(action='/admin/users/' + user.id + '/password', method='POST').mb-4
             input(type='hidden', name='_csrf', value=_csrf)
             .form-row.align-items-center
               .col-sm-8
@@ -37,8 +26,7 @@ block main
                 input.form-control.mb-2.mb-sm-0(name='password', type='text', placeholder='New password')
               .col-auto.ml-auto
                 button.btn.btn-primary(type='submit') Save Password
-
-          form.mt-4(action='/admin/users/' + user.id + '/admin', method='POST')
+          form.mt-4(action='/admin/users/' + user.id + '/admin', method='POST').mb-4
             input(type='hidden', name='_csrf', value=_csrf)
             label Admin powers
             .form-row.align-items-center
@@ -61,11 +49,24 @@ block main
               .col-auto.ml-auto
                 button.btn.btn-primary(type='submit') Make Admin
 
-  .row.mb-4
+    // form to change the user's password
+    .col-sm-6
+      .card
+        .card-header
+          strong Add&nbsp;
+          small.text-muted Service
+        .card-block
+
+  .row
     .col-sm-12
-      .h3 Services
-      // list the services
       .list-group
+        .list-group-item.active
+          .row
+            .col-sm-3 Name
+            .col-sm-3 User
+            .col-sm-4 Password
+            .col-sm-1 Status
+            .col-sm-1
         each service in user.services
           .list-group-item.list-group-item-action
             .row
@@ -75,9 +76,10 @@ block main
                 span #{service.user}
               .col-sm-4
                 span #{service.decryptPassword()}
-              .col-sm-2.text-right
+              .col-sm-1
                 if service.active
                   span.badge.badge-success.mr-4 active
                 else
                   span.badge.badge-danger.mr-4 inactive
-                a.btn.btn-primary.btn-sm(href='/admin/users/' + user.id + '/services/' + service.id, role='button') Edit
+              .col-sm-1.text-right
+                a.btn.btn-secondary.btn-sm(href='/admin/users/' + user.id + '/services/' + service.id, role='button') Edit

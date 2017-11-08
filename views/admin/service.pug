@@ -1,17 +1,12 @@
 extends base
 
 block main
-  .row.mt-2
-    .col-sm-12
-      .h3
-        | #{user.email}&nbsp;
-        small.text-muted #{service.name}
-  .row
+  .row.mt-4
     .col-sm-6
       .card
         .card-header
-          strong Service&nbsp;
-          small.text-muted Form
+          strong Signin&nbsp;
+          small.text-muted Info
         .card-block
           form(action='/admin/users/' + user.id + '/services/' + service.id, method='POST')
             input(type='hidden', name='_csrf', value=_csrf)
@@ -25,27 +20,21 @@ block main
     .col-sm-6
       .card
         .card-header
-          strong Invoices&nbsp;
-          small.text-muted Form
+          strong Add&nbsp;
+          small.text-muted Invoice
         .card-block
 
-  .row.mb-4
+  //- .row.mb-4
+  //-   .col-1.offset-11.text-right
+  //-     button.btn.btn-primary Add
+  .row
     .col-sm-12
-      .h3 Invoices
-      // list the services
       .list-group
+        .list-group-item.active
+          .row
+            .col-sm-3 Name
+            .col-sm-3 User
+            .col-sm-4 Password
+            .col-sm-1 Status
+            .col-sm-1
         //- each service in user.services
-        //-   .list-group-item.list-group-item-action
-        //-     .row
-        //-       .col-sm-3
-        //-         a(href=service.url) #{service.name}
-        //-       .col-sm-3
-        //-         span #{service.user}
-        //-       .col-sm-4
-        //-         span #{service.decryptPassword()}
-        //-       .col-sm-2.text-right
-        //-         if service.active
-        //-           span.badge.badge-success.mr-4 active
-        //-         else
-        //-           span.badge.badge-danger.mr-4 inactive
-        //-         a.btn.btn-primary.btn-sm(href='/admin/users/' + user.id + '/services/' + service.id, role='button') Edit
