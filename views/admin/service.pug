@@ -1,0 +1,40 @@
+extends base
+
+block main
+  .row.mt-4
+    .col-sm-6
+      .card
+        .card-header
+          strong Signin&nbsp;
+          small.text-muted Info
+        .card-block
+          form(action='/admin/users/' + user.id + '/services/' + service.id, method='POST')
+            input(type='hidden', name='_csrf', value=_csrf)
+            .form-group
+              label(for='user') User
+              input.form-control(name='user', type='text', placeholder='User name', value=service.user)
+            .form-group
+              label(for='password') Password
+              input.form-control(name='password', placeholder='User\'s name', value=service.decryptPassword())
+            button.btn.btn-primary(type='submit') Save Access Data
+    .col-sm-6
+      .card
+        .card-header
+          strong Add&nbsp;
+          small.text-muted Invoice
+        .card-block
+
+  //- .row.mb-4
+  //-   .col-1.offset-11.text-right
+  //-     button.btn.btn-primary Add
+  .row
+    .col-sm-12
+      .list-group
+        .list-group-item.active
+          .row
+            .col-sm-3 Name
+            .col-sm-3 User
+            .col-sm-4 Password
+            .col-sm-1 Status
+            .col-sm-1
+        //- each service in user.services

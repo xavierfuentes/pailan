@@ -35,6 +35,7 @@ const userController = require('./controllers/user');
 // const apiController = require('./controllers/api');
 // const contactController = require('./controllers/contact');
 const serviceController = require('./controllers/service');
+const adminController = require('./controllers/admin');
 
 /**
  * API keys and Passport configuration.
@@ -141,6 +142,17 @@ app.post('/account/profile', passportConfig.isAuthenticated, userController.post
 app.post('/account/password', passportConfig.isAuthenticated, userController.postUpdatePassword);
 app.post('/account/delete', passportConfig.isAuthenticated, userController.postDeleteAccount);
 app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userController.getOauthUnlink);
+
+app.get('/admin', passportConfig.isAuthenticated, passportConfig.isAdmin, adminController.index);
+app.get('/admin/users', passportConfig.isAuthenticated, passportConfig.isAdmin, adminController.getUsers);
+app.get('/admin/users/:user', passportConfig.isAuthenticated, passportConfig.isAdmin, adminController.getUser);
+app.post('/admin/users/:user/profile', passportConfig.isAuthenticated, passportConfig.isAdmin, adminController.postUserProfile);
+app.post('/admin/users/:user/password', passportConfig.isAuthenticated, passportConfig.isAdmin, adminController.postUserPassword);
+app.post('/admin/users/:user/admin', passportConfig.isAuthenticated, passportConfig.isAdmin, adminController.postUserAdmin);
+app.get('/admin/users/:user/services/:service', passportConfig.isAuthenticated, passportConfig.isAdmin, adminController.getUserService);
+app.post('/admin/users/:user/services/:service', passportConfig.isAuthenticated, passportConfig.isAdmin, adminController.postUserService);
+app.get('/admin/services', passportConfig.isAuthenticated, passportConfig.isAdmin, adminController.getDefaultServices);
+app.post('/admin/services', passportConfig.isAuthenticated, passportConfig.isAdmin, adminController.postDefaultService);
 
 app.get('/services', passportConfig.isAuthenticated, serviceController.getActiveServices);
 app.get('/services/add', passportConfig.isAuthenticated, serviceController.getServicesAvailable);

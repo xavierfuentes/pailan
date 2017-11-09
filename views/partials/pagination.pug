@@ -1,0 +1,33 @@
+if pages > 1
+  nav(aria-label='Pagination')
+    - var n = 1;
+    ul.pagination.justify-content-center.mb-0
+      if page === 1
+        li.page-item.disabled
+          a.page-link(href='#', tabindex='-1', aria-label='Previous')
+            span(aria-hidden='true') &laquo;
+            span.sr-only Previous
+      else
+        li.page-item
+          a.page-link(href='#', aria-label='Previous')
+            span(aria-hidden='true') &laquo;
+            span.sr-only Previous
+
+      while n <= pages
+        if page === n
+          li.page-item.disabled
+            a.page-link(href='#', tabindex='-1')= n++
+        else
+          li.page-item
+            a.page-link(href='#')= n++
+
+      if page === pages
+        li.page-item.disabled
+          a.page-link(href='#', tabindex='-1', aria-label='Next')
+            span(aria-hidden='true') &raquo;
+            span.sr-only Next
+      else
+        li.page-item
+          a.page-link(href='#', aria-label='Next')
+            span(aria-hidden='true') &raquo;
+            span.sr-only Next

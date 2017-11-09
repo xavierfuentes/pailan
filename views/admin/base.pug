@@ -1,0 +1,65 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    //- meta(name='description', content='CoreUI - Open Source Bootstrap Admin Template')
+    //- meta(name='author', content='Łukasz Holeczek')
+    //- meta(name='keyword', content='Bootstrap,Admin,Template,Open,Source,AngularJS,Angular,Angular2,Angular 2,Angular4,Angular 4,jQuery,CSS,HTML,RWD,Dashboard,React,React.js,Vue,Vue.js')
+    link(rel='shortcut icon', href='img/favicon.png')
+    title Pailan Admin
+    // Icons
+    link(href='/coreui/node_modules/font-awesome/css/font-awesome.min.css', rel='stylesheet')
+    link(href='/coreui/node_modules/simple-line-icons/css/simple-line-icons.css', rel='stylesheet')
+    // Main styles for this application
+    link(href='/coreui/css/style.css', rel='stylesheet')
+
+  body.app.header-fixed.sidebar-fixed.aside-menu-fixed.aside-menu-hidden
+    header.app-header.navbar
+      button.navbar-toggler.mobile-sidebar-toggler.d-lg-none.mr-auto(type='button')
+        span.navbar-toggler-icon
+      a.navbar-brand(href='#')
+      button.navbar-toggler.sidebar-toggler.d-md-down-none(type='button')
+        span.navbar-toggler-icon
+    .app-body
+      .sidebar
+        nav.sidebar-nav
+          ul.nav
+            li.nav-item
+              a.nav-link(href='/admin')
+                i.icon-speedometer
+                |  Dashboard
+            li.nav-item
+              a.nav-link(href='/admin/users')
+                i.icon-user
+                |  Users
+            li.nav-item
+              a.nav-link(href='/admin/services')
+                i.icon-drawer
+                |  Services
+                //- span.badge.badge-primary NEW
+        button.sidebar-minimizer.brand-minimizer(type='button')
+      // Main content
+      main.main
+        .container-fluid
+          block main
+        // /.conainer-fluid
+    footer.app-footer
+      include ../partials/pagination
+      //- span
+      //-   a(href='http://pailan.io') Pailan
+      //-   |  © 2017 Pailan.
+      //- span.ml-auto
+      //-   | Powered by
+      //-   a(href='http://pailan.io') Pailan
+    // Bootstrap and necessary plugins
+    script(src='/coreui/node_modules/jquery/dist/jquery.min.js')
+    script(src='/coreui/node_modules/popper.js/dist/umd/popper.min.js')
+    script(src='/coreui/node_modules/bootstrap/dist/js/bootstrap.min.js')
+    script(src='/coreui/node_modules/pace-progress/pace.min.js')
+    // CoreUI main scripts
+    script(src='/coreui/js/app.js')
+    // Plugins and scripts required by this views
+    // Custom scripts required by this view
+    //- script(src='/coreui/js/views/main.js')

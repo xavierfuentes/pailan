@@ -534,3 +534,11 @@ exports.isAuthorized = (req, res, next) => {
     res.redirect(`/auth/${provider}`);
   }
 };
+
+exports.isAdmin = (req, res, next) => {
+  if (req.user.admin) {
+    next();
+  } else {
+    res.redirect('/');
+  }
+};
