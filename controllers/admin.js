@@ -32,7 +32,7 @@ exports.getUsers = (req, res) => {
 /**
  * GET user details
  */
-exports.getUser = (req, res) => {
+exports.getUser = (req, res, next) => {
   // res.redirect('/admin/users');
   User.findById(req.params.user).populate('services').exec((error, user) => {
     if (error) {
@@ -40,7 +40,12 @@ exports.getUser = (req, res) => {
       return res.redirect('/admin/users');
     }
 
-    res.render('admin/user', { user });
+    Service.find({ owner: undefined }, ['_id', 'name', 'url', 'logo', 'category'], { sort: { category: 'asc', name: 'asc' } })
+      .exec((error, services) => {
+        if (error) { return next(error); }
+
+        res.render('admin/user', { user, services });
+      });
   });
 };
 
@@ -103,7 +108,7 @@ exports.getUserService = (req, res, next) => {
       if (error) { return res.redirect(`/admin/users/${req.params.user}`); }
 
       User.findById(req.params.user, (findError, user) => {
-        res.render('admin/service', { service, user });
+        res.render('admin/userService', { service, user });
       });
     });
 };
@@ -124,6 +129,42 @@ exports.postUserService = (req, res, next) => {
     });
   });
 };
+
+/**
+ * POST add new service
+ */
+exports.addUserService = (req, res, next) => {
+  Service.findById(req.body.service, (err, serviceTemplate) => {
+    if (err) { return next(err); }
+
+    const service = new Service({
+      name: serviceTemplate.name,
+      url: serviceTemplate.url,
+      logo: serviceTemplate.logo,
+      category: serviceTemplate.category,
+      owner: req.body.userid,
+      user: req.body.username,
+      password: req.body.password,
+      active: true,
+    });
+
+    service.save((err) => {
+      if (err) { return next(err); }
+
+      User.findById(req.body.userid, (err, user) => {
+        if (err) { return next(err); }
+
+        user.services.push(service);
+        user.save((err) => {
+          if (err) { return next(err); }
+
+          res.redirect(`/admin/users/${req.body.userid}`);
+        });
+      });
+
+    });
+  });
+}
 
 /**
  * GET default services

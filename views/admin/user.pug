@@ -17,7 +17,8 @@ block main
             .form-group
               label(for='name') Name
               input.form-control(name='name', placeholder='User\'s name', value=user.profile.name)
-            button.btn.btn-primary(type='submit') Save Profile
+            .text-right
+              button.btn.btn-primary(type='submit') Save Profile
           form(action='/admin/users/' + user.id + '/password', method='POST').mb-4
             input(type='hidden', name='_csrf', value=_csrf)
             .form-row.align-items-center
@@ -56,7 +57,23 @@ block main
           strong Add&nbsp;
           small.text-muted Service
         .card-block
-
+          form(action='/admin/users/' + user.id + '/services', method='POST').mb-4
+            input(type='hidden', name='_csrf', value=_csrf)
+            input(type='hidden', name='userid', value=user.id)
+            .form-group
+              label(for='service') Service
+              select.form-control(name='service')
+                option(selected, disabled) Select a service
+                each service in services
+                  option(value=service.id)= service.name
+            .form-group
+              label(for='username') Username
+              input.form-control(name='username', type='text', placeholder='Username')
+            .form-group
+              label(for='password') Password
+              input.form-control(name='password', type='text', placeholder='Password')
+            .text-right
+              button.btn.btn-primary(type='submit') Add Service
   .row
     .col-sm-12
       .list-group
