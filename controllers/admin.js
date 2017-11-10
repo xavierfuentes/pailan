@@ -156,3 +156,34 @@ exports.postDefaultService = (req, res, next) => {
     res.redirect('/admin/services');
   });
 };
+
+/**
+ * GET service detail
+ */
+exports.getService = (req, res, next) => {
+  Service.findById(req.params.service, (error, service) => {
+    if (error) { return next(error); }
+
+    res.render('admin/service', { service });
+  });
+};
+
+/**
+ * POST service detail
+ */
+exports.postService = (req, res, next) => {
+  Service.findById(req.params.service, (error, service) => {
+    if (error) { return next(error); }
+
+    service.name = req.body.name;
+    service.url = req.body.url;
+    service.logo = req.body.logo;
+    service.category = req.body.category;
+
+    service.save((err) => {
+      if (err) { return next(err); }
+
+      res.redirect(`/admin/services/${req.params.service}`);
+    });
+  });
+};

@@ -13,7 +13,15 @@ block main
             .form-row
               .col-2
                 label(for='category') Category
-                input.form-control(name='category', type='text', placeholder='Service Category')
+                select.form-control(name='category')
+                  option(selected, disabled) Select an option
+                  option(value="Dev tools") Dev tools
+                  option(value="Hosting & Domains") Hosting & Domains
+                  option(value="Marketing & Sales") Marketing & Sales
+                  option(value="Others") Others
+                  option(value="Payment & Invoicing") Payment & Invoicing
+                  option(value="Project Management") Project Management
+                  option(value="Support") Support
               .col-2
                 label(for='name') Name
                 input.form-control(name='name', type='text', placeholder='Service Name')

@@ -154,6 +154,8 @@ app.get('/admin/users/:user/services/:service', passportConfig.isAuthenticated, 
 app.post('/admin/users/:user/services/:service', passportConfig.isAuthenticated, passportConfig.isAdmin, adminController.postUserService);
 app.get('/admin/services', passportConfig.isAuthenticated, passportConfig.isAdmin, adminController.getDefaultServices);
 app.post('/admin/services', passportConfig.isAuthenticated, passportConfig.isAdmin, adminController.postDefaultService);
+app.get('/admin/services/:service', passportConfig.isAuthenticated, passportConfig.isAdmin, adminController.getService);
+app.post('/admin/services/:service', passportConfig.isAuthenticated, passportConfig.isAdmin, adminController.postService);
 
 app.get('/services', passportConfig.isAuthenticated, serviceController.getActiveServices);
 app.get('/services/add', passportConfig.isAuthenticated, serviceController.getServicesAvailable);

@@ -2,39 +2,35 @@ extends base
 
 block main
   .row.mt-4
-    .col-sm-6
+    .col-sm-12
       .card
         .card-header
-          strong Signin&nbsp;
+          strong Service&nbsp;
           small.text-muted Info
         .card-block
-          form(action='/admin/users/' + user.id + '/services/' + service.id, method='POST')
+          form(action='/admin/services/' + service.id, method='POST')
             input(type='hidden', name='_csrf', value=_csrf)
-            .form-group
-              label(for='user') User
-              input.form-control(name='user', type='text', placeholder='User name', value=service.user)
-            .form-group
-              label(for='password') Password
-              input.form-control(name='password', placeholder='User\'s name', value=service.decryptPassword())
-            button.btn.btn-primary(type='submit') Save Access Data
-    .col-sm-6
-      .card
-        .card-header
-          strong Add&nbsp;
-          small.text-muted Invoice
-        .card-block
+            .form-row
+              .col-2
+                label(for='category') Category
+                select.form-control(name='category')
+                  option(value="Dev tools", selected=(service.category === 'Dev tools')) Dev tools
+                  option(value="Hosting & Domains", selected=(service.category === 'Hosting & Domains')) Hosting & Domains
+                  option(value="Marketing & Sales", selected=(service.category === 'Marketing & Sales')) Marketing & Sales
+                  option(value="Others", selected=(service.category === 'Others')) Others
+                  option(value="Payment & Invoicing", selected=(service.category === 'Payment & Invoicing')) Payment & Invoicing
+                  option(value="Project Management", selected=(service.category === 'Project Management')) Project Management
+                  option(value="Support", selected=(service.category === 'Support')) Support
+              .col-2
+                label(for='Name') Name
+                input.form-control(name='name', type='text', placeholder='Service name', value=service.name)
+              .col-4
+                label(for='logo') Logo
+                input.form-control(name='logo', placeholder='Service\'s Logo url', value=service.logo)
+              .col-4
+                label(for='url') Url
+                input.form-control(name='url', placeholder='Service\'s Url', value=service.url)
 
-  //- .row.mb-4
-  //-   .col-1.offset-11.text-right
-  //-     button.btn.btn-primary Add
-  .row
-    .col-sm-12
-      .list-group
-        .list-group-item.active
-          .row
-            .col-sm-3 Name
-            .col-sm-3 User
-            .col-sm-4 Password
-            .col-sm-1 Status
-            .col-sm-1
-        //- each service in user.services
+            .form-row.mt-4
+              .col-2.offset-10.text-right
+                button.btn.btn-primary Save Service
