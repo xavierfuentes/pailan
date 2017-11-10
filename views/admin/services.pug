@@ -1,0 +1,55 @@
+extends base
+
+block main
+  .row.mt-4
+    .col-12
+      .card
+        .card-header
+          strong Add&nbsp;
+          small.text-muted Service
+        .card-block
+          form(action='/admin/services/', method='POST')
+            input(type='hidden', name='_csrf', value=_csrf)
+            .form-row
+              .col-2
+                label(for='category') Category
+                input.form-control(name='category', type='text', placeholder='Service Category')
+              .col-2
+                label(for='name') Name
+                input.form-control(name='name', type='text', placeholder='Service Name')
+              .col-4
+                label(for='logo') Logo Url
+                input.form-control(name='logo', type='text', placeholder='Service Logo')
+              .col-4
+                label(for='url') Url
+                input.form-control(name='url', type='text', placeholder='Service Url')
+            .form-row.mt-4
+              .col-2.offset-10.text-right
+                button.btn.btn-primary Add Service
+  .row.mb-4
+    .col-12
+      .list-group
+        .list-group-item.active
+          .row
+            .col-1
+            .col-3
+              span #
+            .col-2
+              span Name
+            .col-4
+              span Url
+            .col-2
+              span Category
+        each service in services
+          a(href=('/admin/services/' + service._id)).list-group-item.list-group-item-action
+            .row
+              .col-1.text-center
+                img(src=service.logo, alt=service.name).img-fluid
+              .col-3
+                span #{service._id}
+              .col-2
+                span #{service.name}
+              .col-4
+                span #{service.url}
+              .col-2
+                span #{service.category}

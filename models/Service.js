@@ -1,5 +1,6 @@
-const encrypt = require('../lib/encription').encrypt;
+const { encrypt, decrypt } = require('../lib/encription');
 const mongoose = require('mongoose');
+const mongoosePaginate = require('mongoose-paginate');
 
 const Schema = mongoose.Schema;
 
@@ -16,6 +17,8 @@ const serviceSchema = new Schema(
   },
   { timestamps: true },
 );
+
+serviceSchema.plugin(mongoosePaginate);
 
 serviceSchema.pre('save', function save(next) {
   const service = this;
@@ -41,6 +44,12 @@ serviceSchema.query.allPrivateByUser = function allPrivateByUser(id) {
 
 serviceSchema.query.allDefault = function allDefault() {
   return this.find({ owner: undefined }).sort('category');
+};
+
+serviceSchema.methods.decryptPassword = function decryptPassword() {
+  const service = this;
+
+  return decrypt(service.password);
 };
 
 const Service = mongoose.model('Service', serviceSchema);

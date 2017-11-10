@@ -1,0 +1,30 @@
+extends base
+
+block main
+  .row.mt-4
+    .col-1.offset-11.text-right
+      button.btn.btn-primary Add
+  .row.mt-4
+    .col-12
+      .list-group
+        .list-group-item.active
+          .row
+            .col-3
+              span #
+            .col-3
+              span Email
+            .col-3
+              span Name
+            .col-3
+              span Services
+        each user in users
+          a(href=('/admin/users/' + user._id)).list-group-item.list-group-item-action
+            .row
+              .col-3
+                span #{user._id}
+              .col-3
+                span #{user.email}
+              .col-3
+                span #{user.profile.name}
+              .col-3
+                span.badge.badge-primary.badge-pill #{user.services.length}

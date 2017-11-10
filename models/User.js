@@ -1,21 +1,23 @@
 const bcrypt = require('bcrypt-nodejs');
 const crypto = require('crypto');
 const mongoose = require('mongoose');
+const mongoosePaginate = require('mongoose-paginate');
 
 const userSchema = new mongoose.Schema(
   {
     email: { type: String, unique: true },
+    admin: { type: Boolean, default: false },
     password: String,
     passwordResetToken: String,
     passwordResetExpires: Date,
 
-    facebook: String,
-    twitter: String,
+    // facebook: String,
+    // twitter: String,
     google: String,
-    github: String,
-    instagram: String,
-    linkedin: String,
-    steam: String,
+    // github: String,
+    // instagram: String,
+    // linkedin: String,
+    // steam: String,
     tokens: Array,
 
     profile: {
@@ -30,6 +32,8 @@ const userSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+userSchema.plugin(mongoosePaginate);
 
 /**
  * Password hash middleware.
