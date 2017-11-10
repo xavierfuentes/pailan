@@ -9,10 +9,10 @@ describe('GET /', () => {
   });
 });
 
-describe('GET /login', () => {
+describe('GET /signin', () => {
   it('should return 200 OK', (done) => {
     request(app)
-      .get('/login')
+      .get('/signin')
       .expect(200, done);
   });
 });
