@@ -2,9 +2,40 @@ extends base
 
 block main
   .row.mt-4
-    .col-1.offset-11.text-right
-      button.btn.btn-primary Add
-  .row.mt-4
+    .col-12
+      .card
+        .card-header
+          strong Add&nbsp;
+          small.text-muted User
+        .card-block
+          form(action='/admin/users/', method='POST')
+            input(type='hidden', name='_csrf', value=_csrf)
+            .form-row
+              .col-4
+                label(for='name') Name
+                input.form-control(name='name', type='text', placeholder='Name')
+              .col-4
+                label(for='email') Email
+                input.form-control(name='email', type='email', placeholder='Email', required)
+              .col-2
+                label(for='password') Password
+                input.form-control(name='password', type='text', placeholder='Password', required)
+              .col-2.text-right
+                label(for='password') Admin
+                div
+                  .form-check.form-check-inline
+                    label.form-check-label(for='admin')
+                      input.form-check-input(type='radio', name='admin', value='true')
+                      | Yes
+                  .form-check.form-check-inline
+                    label.form-check-label(for='admin')
+                      input.form-check-input(type='radio', name='admin', value='false', checked)
+                      | No
+            .form-row.mt-4
+              .col-2.offset-10.text-right
+                button.btn.btn-primary Add User
+
+  .row.mb-4
     .col-12
       .list-group
         .list-group-item.active

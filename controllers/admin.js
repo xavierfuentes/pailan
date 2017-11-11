@@ -1,6 +1,6 @@
 const User = require('../models/User');
 const Service = require('../models/Service');
-// const decrypt = require('../lib/encription').decrypt;
+const Invoice = require('../models/Invoice');
 
 /**
  * GET admin home
@@ -18,8 +18,8 @@ exports.getUsers = (req, res) => {
   User.paginate(query, {
     page: req.query.hasOwnProperty('page') ? +req.query.page : 1,
     limit: req.query.hasOwnProperty('limit') ? +req.query.limit : 20,
-    select: '_id email services', // we're not populating services, only a list of ids
-    sort: 'email'
+    select: '_id email services profile', // we're not populating services, only a list of ids
+    sort: 'createdAt'
   })
     .then(({ docs, ...rest }) => {
       res.render('admin/users', { users: docs, ...rest });
@@ -27,6 +27,51 @@ exports.getUsers = (req, res) => {
     .catch((error) => {
       console.log(error);
     });
+};
+
+/**
+ * POST user
+ */
+exports.postUsers = (req, res, next) => {
+  req.assert('email', 'Email is not valid').isEmail();
+  req.assert('password', 'Password must be at least 4 characters long').len(4);
+  // req.assert('confirmPassword', 'Passwords do not match').equals(req.body.password);
+  req.sanitize('email').normalizeEmail({ gmail_remove_dots: false });
+
+  const errors = req.validationErrors();
+
+  if (errors) {
+    req.flash('errors', errors);
+    return res.redirect('/admin/users');
+  }
+
+  const user = new User({
+    email: req.body.email,
+    password: req.body.password,
+    profile: {
+      name: req.body.name,
+    },
+  });
+
+  if (req.body.admin === true) {
+    user.admin = true;
+  }
+
+  User.findOne({ email: req.body.email }, (err, existingUser) => {
+    if (err) { return next(err); }
+
+    if (existingUser) {
+      req.flash('errors', { msg: 'Account with that email address already exists.' });
+      return res.redirect('/admin/users');
+    }
+
+    user.save((err) => {
+      if (err) { return next(err); }
+
+      // req.flash('errors', { msg: 'Success!' });
+      res.redirect('/admin/users');
+    });
+  });
 };
 
 /**

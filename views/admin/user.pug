@@ -1,7 +1,7 @@
 extends base
 
 block main
-  .row.mt-4
+  .row.mt-4.mb-4
     // form to edit the user's profile
     .col-sm-6
       .card
@@ -74,29 +74,30 @@ block main
               input.form-control(name='password', type='text', placeholder='Password')
             .text-right
               button.btn.btn-primary(type='submit') Add Service
-  .row
-    .col-sm-12
-      .list-group
-        .list-group-item.active
-          .row
-            .col-sm-3 Name
-            .col-sm-3 User
-            .col-sm-4 Password
-            .col-sm-1 Status
-            .col-sm-1
-        each service in user.services
-          .list-group-item.list-group-item-action
+  if user.services.length > 0
+    .row.mb-4
+      .col-sm-12
+        .list-group
+          .list-group-item.active
             .row
-              .col-sm-3
-                a(href=service.url) #{service.name}
-              .col-sm-3
-                span #{service.user}
-              .col-sm-4
-                span #{service.decryptPassword()}
+              .col-sm-3 Name
+              .col-sm-3 User
+              .col-sm-4 Password
+              .col-sm-1 Status
               .col-sm-1
-                if service.active
-                  span.badge.badge-success.mr-4 active
-                else
-                  span.badge.badge-danger.mr-4 inactive
-              .col-sm-1.text-right
-                a.btn.btn-secondary.btn-sm(href='/admin/users/' + user.id + '/services/' + service.id, role='button') Edit
+          each service in user.services
+            .list-group-item.list-group-item-action
+              .row
+                .col-sm-3
+                  a(href=service.url) #{service.name}
+                .col-sm-3
+                  span #{service.user}
+                .col-sm-4
+                  span #{service.decryptPassword()}
+                .col-sm-1
+                  if service.active
+                    span.badge.badge-success.mr-4 active
+                  else
+                    span.badge.badge-danger.mr-4 inactive
+                .col-sm-1.text-right
+                  a.btn.btn-secondary.btn-sm(href='/admin/users/' + user.id + '/services/' + service.id, role='button') Edit

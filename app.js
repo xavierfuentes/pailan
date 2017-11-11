@@ -144,8 +144,16 @@ app.post('/account/password', passportConfig.isAuthenticated, userController.pos
 app.post('/account/delete', passportConfig.isAuthenticated, userController.postDeleteAccount);
 app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userController.getOauthUnlink);
 
+app.get('/services', passportConfig.isAuthenticated, serviceController.getActiveServices);
+app.get('/services/add', passportConfig.isAuthenticated, serviceController.getServicesAvailable);
+app.post('/services/add', passportConfig.isAuthenticated, serviceController.addService);
+// app.put('/services', serviceController.updateServices)
+// app.delete('/services/:service', serviceController.deleteServices);
+app.get('/services/:service', passportConfig.isAuthenticated, invoiceController.getInvoices);
+
 app.get('/admin', passportConfig.isAuthenticated, passportConfig.isAdmin, adminController.index);
 app.get('/admin/users', passportConfig.isAuthenticated, passportConfig.isAdmin, adminController.getUsers);
+app.post('/admin/users', passportConfig.isAuthenticated, passportConfig.isAdmin, adminController.postUsers);
 app.get('/admin/users/:user', passportConfig.isAuthenticated, passportConfig.isAdmin, adminController.getUser);
 app.post('/admin/users/:user/profile', passportConfig.isAuthenticated, passportConfig.isAdmin, adminController.postUserProfile);
 app.post('/admin/users/:user/password', passportConfig.isAuthenticated, passportConfig.isAdmin, adminController.postUserPassword);
@@ -157,13 +165,6 @@ app.get('/admin/services', passportConfig.isAuthenticated, passportConfig.isAdmi
 app.post('/admin/services', passportConfig.isAuthenticated, passportConfig.isAdmin, adminController.postDefaultService);
 app.get('/admin/services/:service', passportConfig.isAuthenticated, passportConfig.isAdmin, adminController.getService);
 app.post('/admin/services/:service', passportConfig.isAuthenticated, passportConfig.isAdmin, adminController.postService);
-
-app.get('/services', passportConfig.isAuthenticated, serviceController.getActiveServices);
-app.get('/services/add', passportConfig.isAuthenticated, serviceController.getServicesAvailable);
-app.post('/services/add', passportConfig.isAuthenticated, serviceController.addService);
-// app.put('/services', serviceController.updateServices)
-// app.delete('/services/:service', serviceController.deleteServices);
-app.get('/services/:service', passportConfig.isAuthenticated, invoiceController.getInvoices);
 
 /**
  * API examples routes.
