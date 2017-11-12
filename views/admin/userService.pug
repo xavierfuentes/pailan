@@ -23,15 +23,39 @@ block main
           strong Add&nbsp;
           small.text-muted Invoice
         .card-block
+          form(role='form', enctype='multipart/form-data', method='POST', action='/admin/users/' + user.id + '/services/' + service.id + '/invoices')
+            .form-group
+              label(for='date') Date
+              input.form-control(name='date', type='text', placeholder='YYYY-MM-DD', required)
+            .form-group
+              label(for='amount') Amount
+              input.form-control(name='amount', type='text', placeholder='Total', required)
+            .form-group
+              label(for='currency') Currency
+              input.form-control(name='currency', type='text', placeholder='£')
+            .form-group
+              label(for='invoice') File (pdf)
+              input.form-control(name='invoice', type='file', required)
+            button.btn.btn-primary(type='submit') Save invoice
 
-  .row
-    .col-sm-12
-      .list-group
-        .list-group-item.active
-          .row
-            .col-sm-3 Name
-            .col-sm-3 User
-            .col-sm-4 Password
-            .col-sm-1 Status
-            .col-sm-1
-        //- each service in user.services
+  if service.invoices.length > 0
+    .row
+      .col-sm-12
+        .list-group
+          .list-group-item.active
+            .row
+              .col-sm-3 Date Created
+              .col-sm-3 Date
+              .col-sm-2 Amount
+              .col-sm-4 Link
+          each invoice in service.invoices
+            .list-group-item.list-group-item-action
+              .row
+                .col-sm-3
+                  span #{invoice.createdAt}
+                .col-sm-3
+                  span #{invoice.date}
+                .col-sm-2
+                  span #{invoice.currency}#{invoice.amount}
+                .col-sm-4
+                  a(href=`/${invoice.file.filename}`, target='invoice') See

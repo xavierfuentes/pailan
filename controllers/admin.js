@@ -148,7 +148,7 @@ exports.postUserAdmin = (req, res, next) => {
  */
 exports.getUserService = (req, res, next) => {
   Service.findById(req.params.service)
-    // .populate('invoices')
+    .populate('invoices')
     .exec((error, service) => {
       if (error) { return res.redirect(`/admin/users/${req.params.user}`); }
 
@@ -270,6 +270,42 @@ exports.postService = (req, res, next) => {
       if (err) { return next(err); }
 
       res.redirect(`/admin/services/${req.params.service}`);
+    });
+  });
+};
+
+exports.postUserInvoice = (req, res, next) => {
+  Service.findById(req.params.service, (error, service) => {
+    if (error) { return next(error); }
+
+    if (!req.file) {
+      res.status(500).send('File type not valid');
+    }
+
+    const invoice = new Invoice({
+      owner: req.params.user,
+      service: req.params.service,
+      date: new Date(req.body.date), // use momentjs
+      amount: req.body.amount,
+      currency: req.body.currency,
+      file: req.file,
+    });
+
+    User.findById(req.params.user, (error, user) => {
+      if (error) { return next(error); }
+
+      invoice.save((err) => {
+        if (err) { return next(err); }
+
+        service.invoices.push(invoice);
+        user.invoices.push(invoice);
+
+        service.save((err) => {
+          if (err) { return next(err); }
+
+          res.redirect(`/admin/users/${req.params.user}/services/${req.params.service}`);
+        });
+      });
     });
   });
 };

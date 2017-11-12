@@ -34,17 +34,11 @@ block main
               .col-auto
                 .form-check.form-check-inline
                   label.form-check-label(for='admin')
-                    if user.admin
-                      input.form-check-input(type='radio', name='admin', value='true', checked)
-                    else
-                      input.form-check-input(type='radio', name='admin', value='true')
+                    input.form-check-input(type='radio', name='admin', value='true', checked=user.admin)
                     | Yes
                 .form-check.form-check-inline
                   label.form-check-label(for='admin')
-                    if user.admin
-                      input.form-check-input(type='radio', name='admin', value='false')
-                    else
-                      input.form-check-input(type='radio', name='admin', value='false', checked)
+                    input.form-check-input(type='radio', name='admin', value='false', checked=!user.admin)
                     | No
                 small.form-text.text-muted "With great power comes great responsibility" Uncle Ben.
               .col-auto.ml-auto

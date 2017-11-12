@@ -20,7 +20,24 @@ const expressStatusMonitor = require('express-status-monitor');
 const sass = require('node-sass-middleware');
 const multer = require('multer');
 
-const upload = multer({ dest: path.join(__dirname, 'uploads') });
+const upload = multer({
+  storage: multer.diskStorage({
+    destination: function(req, file, cb) {
+      cb(null, path.join(__dirname, 'uploads'))
+    },
+    filename: function (req, file, cb) {
+      // cb(null, file.fieldname + '-' + Date.now() + '.pdf')
+      cb(null, `u-${req.params.user}-s-${req.params.service}-d-${Date.now()}.pdf`)
+    }
+  }),
+  fileFilter: function(req, file, cb) {
+    if (/(?:\.([^.]+))?$/.exec(file.originalname)[1] === 'pdf') {
+      cb(null, true)
+    }
+    cb(null, false)
+  }
+  // dest: path.join(__dirname, 'uploads')
+});
 
 /**
  * Load environment variables from .env file, where API keys and passwords are configured.
@@ -94,7 +111,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 app.use((req, res, next) => {
-  if (req.path === '/api/upload') {
+  // if (req.path === '/uploads') {
+  if (req.path.match(/\/admin\/users\/([a-z0-9]+)\/services\/([a-z0-9]+)\/invoices/i) !== null) {
     next();
   } else {
     lusca.csrf()(req, res, next);
@@ -122,6 +140,7 @@ app.use((req, res, next) => {
   next();
 });
 app.use(express.static(path.join(__dirname, 'public'), { maxAge: 31557600000 }));
+app.use(express.static(path.join(__dirname, 'uploads'), { maxAge: 31557600000 }));
 
 /**
  * Primary app routes.
@@ -161,6 +180,7 @@ app.post('/admin/users/:user/admin', passportConfig.isAuthenticated, passportCon
 app.post('/admin/users/:user/services', passportConfig.isAuthenticated, passportConfig.isAdmin, adminController.addUserService);
 app.get('/admin/users/:user/services/:service', passportConfig.isAuthenticated, passportConfig.isAdmin, adminController.getUserService);
 app.post('/admin/users/:user/services/:service', passportConfig.isAuthenticated, passportConfig.isAdmin, adminController.postUserService);
+app.post('/admin/users/:user/services/:service/invoices', passportConfig.isAuthenticated, passportConfig.isAdmin, upload.single('invoice'), adminController.postUserInvoice);
 app.get('/admin/services', passportConfig.isAuthenticated, passportConfig.isAdmin, adminController.getDefaultServices);
 app.post('/admin/services', passportConfig.isAuthenticated, passportConfig.isAdmin, adminController.postDefaultService);
 app.get('/admin/services/:service', passportConfig.isAuthenticated, passportConfig.isAdmin, adminController.getService);

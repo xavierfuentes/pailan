@@ -9,7 +9,17 @@ const invoiceSchema = new Schema(
     date: Date,
     amount: Number,
     currency: String,
-    // file: { data: Buffer, contentType: String },
+    // url: String,
+    file: {
+      fieldname: String,
+      originalname: String,
+      encoding: String,
+      mimetype: String,
+      destination: String,
+      filename: String,
+      path: String,
+      size: String,
+    },
   },
   { timestamps: true },
 );
