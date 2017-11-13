@@ -22,21 +22,19 @@ const multer = require('multer');
 
 const upload = multer({
   storage: multer.diskStorage({
-    destination: function(req, file, cb) {
-      cb(null, path.join(__dirname, 'uploads'))
+    destination: (req, file, cb) => {
+      cb(null, path.join(__dirname, 'uploads'));
     },
-    filename: function (req, file, cb) {
-      // cb(null, file.fieldname + '-' + Date.now() + '.pdf')
-      cb(null, `u-${req.params.user}-s-${req.params.service}-d-${Date.now()}.pdf`)
-    }
+    filename: (req, file, cb) => {
+      cb(null, `u${req.params.user}-s${req.params.service}-${Date.now()}.pdf`);
+    },
   }),
-  fileFilter: function(req, file, cb) {
+  fileFilter: (req, file, cb) => {
     if (/(?:\.([^.]+))?$/.exec(file.originalname)[1] === 'pdf') {
-      cb(null, true)
+      cb(null, true);
     }
-    cb(null, false)
-  }
-  // dest: path.join(__dirname, 'uploads')
+    cb(null, false);
+  },
 });
 
 /**
@@ -70,7 +68,7 @@ const app = express();
  */
 mongoose.Promise = global.Promise;
 mongoose.connect(process.env.MONGODB_URI || process.env.MONGOLAB_URI, { useMongoClient: true });
-mongoose.connection.on('error', err => {
+mongoose.connection.on('error', (err) => {
   console.error(err);
   console.log('%s MongoDB connection error. Please make sure MongoDB is running.', chalk.red('✗'));
   process.exit();
@@ -85,28 +83,24 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 app.use(expressStatusMonitor());
 app.use(compression());
-app.use(
-  sass({
-    src: path.join(__dirname, 'public'),
-    dest: path.join(__dirname, 'public'),
-  })
-);
+app.use(sass({
+  src: path.join(__dirname, 'public'),
+  dest: path.join(__dirname, 'public'),
+}), );
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(expressValidator());
-app.use(
-  session({
-    resave: true,
-    saveUninitialized: true,
-    secret: process.env.SESSION_SECRET,
-    store: new MongoStore({
-      url: process.env.MONGODB_URI || process.env.MONGOLAB_URI,
-      autoReconnect: true,
-      clear_interval: 3600,
-    }),
-  })
-);
+app.use(session({
+  resave: true,
+  saveUninitialized: true,
+  secret: process.env.SESSION_SECRET,
+  store: new MongoStore({
+    url: process.env.MONGODB_URI || process.env.MONGOLAB_URI,
+    autoReconnect: true,
+    clear_interval: 3600,
+  }),
+}), );
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
@@ -142,6 +136,8 @@ app.use((req, res, next) => {
 app.use(express.static(path.join(__dirname, 'public'), { maxAge: 31557600000 }));
 app.use(express.static(path.join(__dirname, 'uploads'), { maxAge: 31557600000 }));
 
+app.locals.moment = require('moment');
+
 /**
  * Primary app routes.
  */
@@ -171,20 +167,91 @@ app.post('/services/add', passportConfig.isAuthenticated, serviceController.addS
 app.get('/services/:service', passportConfig.isAuthenticated, invoiceController.getInvoices);
 
 app.get('/admin', passportConfig.isAuthenticated, passportConfig.isAdmin, adminController.index);
-app.get('/admin/users', passportConfig.isAuthenticated, passportConfig.isAdmin, adminController.getUsers);
-app.post('/admin/users', passportConfig.isAuthenticated, passportConfig.isAdmin, adminController.postUsers);
-app.get('/admin/users/:user', passportConfig.isAuthenticated, passportConfig.isAdmin, adminController.getUser);
-app.post('/admin/users/:user/profile', passportConfig.isAuthenticated, passportConfig.isAdmin, adminController.postUserProfile);
-app.post('/admin/users/:user/password', passportConfig.isAuthenticated, passportConfig.isAdmin, adminController.postUserPassword);
-app.post('/admin/users/:user/admin', passportConfig.isAuthenticated, passportConfig.isAdmin, adminController.postUserAdmin);
-app.post('/admin/users/:user/services', passportConfig.isAuthenticated, passportConfig.isAdmin, adminController.addUserService);
-app.get('/admin/users/:user/services/:service', passportConfig.isAuthenticated, passportConfig.isAdmin, adminController.getUserService);
-app.post('/admin/users/:user/services/:service', passportConfig.isAuthenticated, passportConfig.isAdmin, adminController.postUserService);
-app.post('/admin/users/:user/services/:service/invoices', passportConfig.isAuthenticated, passportConfig.isAdmin, upload.single('invoice'), adminController.postUserInvoice);
-app.get('/admin/services', passportConfig.isAuthenticated, passportConfig.isAdmin, adminController.getDefaultServices);
-app.post('/admin/services', passportConfig.isAuthenticated, passportConfig.isAdmin, adminController.postDefaultService);
-app.get('/admin/services/:service', passportConfig.isAuthenticated, passportConfig.isAdmin, adminController.getService);
-app.post('/admin/services/:service', passportConfig.isAuthenticated, passportConfig.isAdmin, adminController.postService);
+app.get(
+  '/admin/users',
+  passportConfig.isAuthenticated,
+  passportConfig.isAdmin,
+  adminController.getUsers,
+);
+app.post(
+  '/admin/users',
+  passportConfig.isAuthenticated,
+  passportConfig.isAdmin,
+  adminController.postUsers,
+);
+app.get(
+  '/admin/users/:user',
+  passportConfig.isAuthenticated,
+  passportConfig.isAdmin,
+  adminController.getUser,
+);
+app.post(
+  '/admin/users/:user/profile',
+  passportConfig.isAuthenticated,
+  passportConfig.isAdmin,
+  adminController.postUserProfile,
+);
+app.post(
+  '/admin/users/:user/password',
+  passportConfig.isAuthenticated,
+  passportConfig.isAdmin,
+  adminController.postUserPassword,
+);
+app.post(
+  '/admin/users/:user/admin',
+  passportConfig.isAuthenticated,
+  passportConfig.isAdmin,
+  adminController.postUserAdmin,
+);
+app.post(
+  '/admin/users/:user/services',
+  passportConfig.isAuthenticated,
+  passportConfig.isAdmin,
+  adminController.addUserService,
+);
+app.get(
+  '/admin/users/:user/services/:service',
+  passportConfig.isAuthenticated,
+  passportConfig.isAdmin,
+  adminController.getUserService,
+);
+app.post(
+  '/admin/users/:user/services/:service',
+  passportConfig.isAuthenticated,
+  passportConfig.isAdmin,
+  adminController.postUserService,
+);
+app.post(
+  '/admin/users/:user/services/:service/invoices',
+  passportConfig.isAuthenticated,
+  passportConfig.isAdmin,
+  upload.single('invoice'),
+  adminController.postUserInvoice,
+);
+app.get(
+  '/admin/services',
+  passportConfig.isAuthenticated,
+  passportConfig.isAdmin,
+  adminController.getDefaultServices,
+);
+app.post(
+  '/admin/services',
+  passportConfig.isAuthenticated,
+  passportConfig.isAdmin,
+  adminController.postDefaultService,
+);
+app.get(
+  '/admin/services/:service',
+  passportConfig.isAuthenticated,
+  passportConfig.isAdmin,
+  adminController.getService,
+);
+app.post(
+  '/admin/services/:service',
+  passportConfig.isAuthenticated,
+  passportConfig.isAdmin,
+  adminController.postService,
+);
 
 /**
  * API examples routes.
@@ -276,7 +343,12 @@ app.use(errorHandler());
  * Start Express server.
  */
 app.listen(app.get('port'), () => {
-  console.log('%s App is running at http://localhost:%d in %s mode', chalk.green('✓'), app.get('port'), app.get('env'));
+  console.log(
+    '%s App is running at http://localhost:%d in %s mode',
+    chalk.green('✓'),
+    app.get('port'),
+    app.get('env'),
+  );
   console.log('  Press CTRL-C to stop\n');
 });
 

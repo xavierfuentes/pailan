@@ -44,18 +44,18 @@ block main
         .list-group
           .list-group-item.active
             .row
-              .col-sm-3 Date Created
-              .col-sm-3 Date
+              .col-sm-4 Date Created
+              .col-sm-4 Date
               .col-sm-2 Amount
-              .col-sm-4 Link
+              .col-sm-2 Link
           each invoice in service.invoices
             .list-group-item.list-group-item-action
               .row
-                .col-sm-3
-                  span #{invoice.createdAt}
-                .col-sm-3
-                  span #{invoice.date}
+                .col-sm-4
+                  span #{moment(invoice.createdAt).format('DD/MM/YYYY')}
+                .col-sm-4
+                  span #{moment(invoice.date).format('DD/MM/YYYY')}
                 .col-sm-2
                   span #{invoice.currency}#{invoice.amount}
-                .col-sm-4
+                .col-sm-2
                   a(href=`/${invoice.file.filename}`, target='invoice') See

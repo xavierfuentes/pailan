@@ -7,19 +7,21 @@ const Invoice = require('../models/Invoice');
  * List all invoices for a service.
  */
 exports.getInvoices = (req, res) => {
-  Service.findById(req.params.service, (errors, service) => {
-    const { invoices } = service;
+  const query = { service: req.params.service };
 
-    if (errors) {
-      req.flash('errors', errors);
-      return res.redirect('/services');
-    }
-
-    if (!invoices.length) {
-      // req.flash('errors', errors); // todo: add the error
-      return res.redirect('/services');
-    }
-
-    console.log(invoices);
-  });
+  Invoice.paginate(query, {
+    page: req.query.hasOwnProperty('page') ? +req.query.page : 1,
+    limit: req.query.hasOwnProperty('limit') ? +req.query.limit : 20,
+    // select: 'email services profile',
+    // populate: 'service',
+    sort: 'date'
+  })
+    .then(({ docs, ...rest }) => {
+      Service.findById(req.params.service, (err, service) => {
+        res.render('invoices/list', { title: 'Add Service', invoices: docs, service, ...rest });
+      })
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 };

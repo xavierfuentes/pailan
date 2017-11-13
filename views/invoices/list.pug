@@ -7,18 +7,24 @@ block main
         .col-lg-6
           .title.text-center
             h2
-              | All&nbsp
+              | #{service.name}&nbsp
               b Invoices
             span.title-border
               i.mdi.mdi-set-none
 
       .row.mt-4.pt-4
         .col-lg-8
+          .row.default-invoice-row.mt-3.mb-3
+            .col
+              | Date
+            .col
+              | Amount
+            .col
+              | Link
           for invoice in invoices
             .row.default-invoice-row.mt-3.mb-3
-              .col-3
-                Date
-              .col-7
-                Amount
-              .col-2
-                Link
+              .col #{moment(invoice.date).format('DD/MM/YYYY')}
+              .col #{invoice.currency}#{invoice.amount}
+              .col
+                a(href=`/${invoice.file.filename}`, target='invoice') Download
+

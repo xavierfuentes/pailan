@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const mongoosePaginate = require('mongoose-paginate');
 
 const Schema = mongoose.Schema;
 
@@ -23,6 +24,8 @@ const invoiceSchema = new Schema(
   },
   { timestamps: true },
 );
+
+invoiceSchema.plugin(mongoosePaginate);
 
 const Invoice = mongoose.model('Invoice', invoiceSchema);
 
