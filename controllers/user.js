@@ -3,6 +3,7 @@ const crypto = bluebird.promisifyAll(require('crypto'));
 const nodemailer = require('nodemailer');
 const passport = require('passport');
 const User = require('../models/User');
+const stripe = require('stripe')(process.env.STRIPE_SKEY);
 
 /**
  * GET /signin
@@ -99,19 +100,25 @@ exports.postSignup = (req, res, next) => {
     if (err) {
       return next(err);
     }
+
     if (existingUser) {
       req.flash('errors', { msg: 'Account with that email address already exists.' });
       return res.redirect('/signup');
     }
-    user.save(err => {
-      if (err) {
-        return next(err);
-      }
-      req.logIn(user, err => {
+
+    stripe.customers.create({ email: req.body.email }, (err, customer) => {
+      user.stripe = customer.id;
+
+      user.save((err) => {
         if (err) {
           return next(err);
         }
-        res.redirect('/');
+        req.logIn((user, err) => {
+          if (err) {
+            return next(err);
+          }
+          res.redirect('/');
+        });
       });
     });
   });
