@@ -56,9 +56,9 @@ exports.addService = (req, res, next) => {
       }
 
       if (user.services.length >= 3) {
-        console.log('adding subscription!');
         stripe.subscriptions.update(user.stripe.subscription, {
           quantity: user.services.length + 1,
+          prorate: false,
         }, (err, subscription) => {
           console.log(subscription);
         });
