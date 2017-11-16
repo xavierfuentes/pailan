@@ -107,17 +107,19 @@ exports.postSignup = (req, res, next) => {
     }
 
     stripe.customers.create({ email: req.body.email }, (err, customer) => {
-      user.stripe = customer.id;
+      stripe.subscriptions.create({
+        customer: customer.id,
+        items: [{ plan: 'basic-3', quantity: 0 }]
+      }, (err, subscription) => {
+        user.stripe.id = customer.id;
+        user.stripe.subscription = subscription.id;
 
-      user.save((err) => {
-        if (err) {
-          return next(err);
-        }
-        req.logIn((user, err) => {
-          if (err) {
-            return next(err);
-          }
-          res.redirect('/');
+        user.save((err) => {
+          if (err) { return next(err); }
+          req.logIn(user, (err) => {
+            if (err) { return next(err); }
+            res.redirect('/');
+          });
         });
       });
     });

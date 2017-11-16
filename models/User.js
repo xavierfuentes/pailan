@@ -12,7 +12,10 @@ const userSchema = new mongoose.Schema(
     passwordResetExpires: Date,
 
     google: String,
-    stripe: String,
+    stripe: {
+      id: String,
+      subscription: String
+    },
     tokens: Array,
 
     profile: {

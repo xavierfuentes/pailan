@@ -4,7 +4,7 @@
  */
 const Service = require('../models/Service');
 const User = require('../models/User');
-const decrypt = require('../lib/encription').decrypt;
+const stripe = require('stripe')(process.env.STRIPE_SKEY);
 
 exports.getActiveServices = (req, res) => {
   Service.find()
@@ -50,26 +50,33 @@ exports.addService = (req, res, next) => {
       active: true,
     });
 
-    service.save((err) => {
+    User.findById(req.user.id, (err, user) => {
       if (err) {
         return next(err);
       }
 
-      User.findById(req.user.id, (err, user) => {
-        if (err) {
-          return next(err);
-        }
+      if (user.services.length >= 3) {
+        console.log('adding subscription!');
+        stripe.subscriptions.update(user.stripe.subscription, {
+          quantity: user.services.length + 1,
+        }, (err, subscription) => {
+          console.log(subscription);
+        });
+      }
+
+      service.save((err) => {
+        if (err) { return next(err); }
 
         user.services.push(service);
         user.save((err) => {
           if (err) {
             return next(err);
           }
+
+          req.flash('success', { msg: 'Service has been added.' });
+          res.redirect('/services');
         });
       });
-
-      req.flash('success', { msg: 'Service has been added.' });
-      res.redirect('/services');
     });
   });
 };
