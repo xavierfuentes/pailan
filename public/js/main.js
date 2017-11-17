@@ -31,4 +31,25 @@ $(function() {
     ServiceLogos.removeClass('active');
     $(this).addClass('active');
   });
+
+  // AddServiceButton.click(function(event) {
+  //   event.preventDefault
+  // });
+
+  // document.getElementById('customButton').addEventListener('click', function(e) {
+  //   // Open Checkout with further options:
+  //   handler.open({
+  //     name: 'Pailan',
+  //     description: '2 widgets',
+  //     zipCode: true,
+  //     currency: 'gbp',
+  //     amount: 2000
+  //   });
+  //   e.preventDefault();
+  // });
+
+  // // Close Checkout on page navigation:
+  // window.addEventListener('popstate', function() {
+  //   handler.close();
+  // });
 });

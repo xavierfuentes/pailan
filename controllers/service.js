@@ -28,57 +28,57 @@ exports.getServicesAvailable = (req, res) => {
 
 exports.addService = (req, res, next) => {
   const errors = req.validationErrors();
+  console.log(req.body)
+  // if (errors) {
+  //   req.flash('errors', errors);
+  //   return res.redirect('/services');
+  // }
 
-  if (errors) {
-    req.flash('errors', errors);
-    return res.redirect('/services');
-  }
+  // Service.findById(req.body.selectedServiceId, (err, serviceTemplate) => {
+  //   if (err) {
+  //     return next(err);
+  //   }
 
-  Service.findById(req.body.selectedServiceId, (err, serviceTemplate) => {
-    if (err) {
-      return next(err);
-    }
+  //   const service = new Service({
+  //     name: serviceTemplate.name,
+  //     url: serviceTemplate.url,
+  //     logo: serviceTemplate.logo,
+  //     category: serviceTemplate.category,
+  //     owner: req.user.id,
+  //     user: req.body.user,
+  //     password: req.body.password,
+  //     active: true,
+  //   });
 
-    const service = new Service({
-      name: serviceTemplate.name,
-      url: serviceTemplate.url,
-      logo: serviceTemplate.logo,
-      category: serviceTemplate.category,
-      owner: req.user.id,
-      user: req.body.user,
-      password: req.body.password,
-      active: true,
-    });
+  //   User.findById(req.user.id, (err, user) => {
+  //     if (err) {
+  //       return next(err);
+  //     }
 
-    User.findById(req.user.id, (err, user) => {
-      if (err) {
-        return next(err);
-      }
+  //     if (user.services.length >= 3) {
+  //       stripe.subscriptions.update(user.stripe.subscription, {
+  //         quantity: user.services.length + 1,
+  //         prorate: false,
+  //       }, (err, subscription) => {
+  //         console.log(subscription);
+  //       });
+  //     }
 
-      if (user.services.length >= 3) {
-        stripe.subscriptions.update(user.stripe.subscription, {
-          quantity: user.services.length + 1,
-          prorate: false,
-        }, (err, subscription) => {
-          console.log(subscription);
-        });
-      }
+  //     service.save((err) => {
+  //       if (err) { return next(err); }
 
-      service.save((err) => {
-        if (err) { return next(err); }
+  //       user.services.push(service);
+  //       user.save((err) => {
+  //         if (err) {
+  //           return next(err);
+  //         }
 
-        user.services.push(service);
-        user.save((err) => {
-          if (err) {
-            return next(err);
-          }
-
-          req.flash('success', { msg: 'Service has been added.' });
-          res.redirect('/services');
-        });
-      });
-    });
-  });
+  //         req.flash('success', { msg: 'Service has been added.' });
+  //         res.redirect('/services');
+  //       });
+  //     });
+  //   });
+  // });
 };
 
 exports.updateServices = (req, res, next) => {};
