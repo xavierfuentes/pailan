@@ -16,7 +16,6 @@ block main
         script(src='https://checkout.stripe.com/checkout.js')
         input(type='hidden', name='_csrf', value=_csrf)
         input(type='hidden', name='selectedServiceId', id='selectedServiceId')
-        input(type='hidden', name='stripetoken', id='stripetoken')
         .row.mt-4.pt-4
           .col-lg-8
             .row
@@ -44,31 +43,8 @@ block main
             .row
               .col-md
                 input#add-service-button.submitBnt.btn.btn-primary.btn-custom.btn-block(type='submit', value='Add Service')
-
-        if (user.services.length === 3)
-          script(type='text/javascript').
-            var handler = StripeCheckout.configure({
-              key: '#{process.env.STRIPE_PKEY}',
-              image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
-              locale: 'auto',
-              token: function(token) {
-                console.log(token)
-              }
-            });
-
-            document.getElementById('add-service-button').addEventListener('click', function(e) {
-              handler.open({
-                name: 'Pailan',
-                description: 'Service Subscription',
-                zipCode: true,
-                billingAddress: true,
-                email: '#{user.email}',
-                image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
-                locale: 'auto',
-              });
-              e.preventDefault();
-            });
-
-            window.addEventListener('popstate', function() {
-              handler.close();
-            });
+  script(type='text/javascript').
+    window.pailan = {
+      user: { services: #{user.services.length}, email: '#{user.email}' },
+      stripe: { pkey: '#{process.env.STRIPE_PKEY}' },
+    };

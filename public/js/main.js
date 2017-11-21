@@ -1,55 +1,80 @@
 /* eslint-disable */
-$(function() {
+$(
+  (function(pailan, axios, undefined) {
+    /* Services */
 
-  /* Services */
+    // selectors
+    var serviceSelectedId = null;
+    var userDataForm = $('add-service-form');
+    var csrfInput = $('input[name="_csrf"]');
+    var serviceIdInput = $('input#selectedServiceId');
+    var AddServiceButton = $('#add-service-button');
+    var ServiceLogos = $('#add-service').find('.default-service-box');
+    var ServiceRows = $('#services-list').find('.default-service-row');
+    var UserInput = $('input#user');
+    var PasswordInput = $('input#password');
+    var ServiceInput = $('input#service');
 
-  // selectors
-  var serviceSelectedId = null;
-  var userDataForm = $('add-service-form');
-  var serviceIdInput = $('input#selectedServiceId');
-  var AddServiceButton = $('#add-service-button');
-  var ServiceLogos = $('#add-service').find('.default-service-box');
-  var ServiceRows = $('#services-list').find('.default-service-row');
-  var UserInput = $('#user');
-  var PasswordInput = $('#password');
-  var ServiceInput = $('#service');
+    // Events
+    ServiceLogos.click(function(event) {
+      // put the id in the hidden input
+      serviceSelectedId = $(this).data('id');
+      serviceIdInput.val(serviceSelectedId);
 
-  // Events
-  ServiceLogos.click(function(event) {
-    // put the id in the hidden input
-    serviceSelectedId = $(this).data('id');
-    serviceIdInput.val(serviceSelectedId);
+      // put the service's name in the input
+      ServiceInput.val($(this).data('name'));
 
-    // put the service's name in the input
-    ServiceInput.val($(this).data('name'));
+      // enable the form to be used
+      UserInput.prop('disabled', false);
+      PasswordInput.prop('disabled', false);
 
-    // enable the form to be used
-    UserInput.prop('disabled', false);
-    PasswordInput.prop('disabled', false);
+      // toggles active class
+      ServiceLogos.removeClass('active');
+      $(this).addClass('active');
+    });
 
-    // toggles active class
-    ServiceLogos.removeClass('active');
-    $(this).addClass('active');
-  });
+    if (pailan.user && pailan.user.services === 3) {
+      var handler = StripeCheckout.configure({
+        key: pailan.stripe.pkey,
+        image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
+        locale: 'auto',
+        token: function(token) {
+          var data = {
+            _csrf: csrfInput.val(),
+            token: token,
+            user: UserInput.val(),
+            password: PasswordInput.val(),
+            selectedServiceId: serviceIdInput.val(),
+          };
+          axios
+            .post('/services/add', data)
+            .then(function(response) {
+              if (response.status === 200) {
+                window.location.assign('/services')
+              }
+            })
+            .catch(function(error) {
+              window.location.reload(true);
+            });
+        },
+      });
 
-  // AddServiceButton.click(function(event) {
-  //   event.preventDefault
-  // });
+      AddServiceButton.click(function(event) {
+        handler.open({
+          name: 'Pailan',
+          description: 'Service Subscription',
+          zipCode: true,
+          billingAddress: true,
+          email: pailan.user.email,
+          image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
+          locale: 'auto',
+        });
+        event.preventDefault();
+      });
 
-  // document.getElementById('customButton').addEventListener('click', function(e) {
-  //   // Open Checkout with further options:
-  //   handler.open({
-  //     name: 'Pailan',
-  //     description: '2 widgets',
-  //     zipCode: true,
-  //     currency: 'gbp',
-  //     amount: 2000
-  //   });
-  //   e.preventDefault();
-  // });
-
-  // // Close Checkout on page navigation:
-  // window.addEventListener('popstate', function() {
-  //   handler.close();
-  // });
-});
+      window.addEventListener('popstate', function() {
+        handler.close();
+      });
+    }
+  })(window.pailan || {}, window.axios),
+);

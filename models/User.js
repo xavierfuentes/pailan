@@ -14,7 +14,7 @@ const userSchema = new mongoose.Schema(
     google: String,
     stripe: {
       id: String,
-      subscription: String
+      subscription: String,
     },
     tokens: Array,
 
