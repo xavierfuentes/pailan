@@ -1,29 +1,19 @@
 {
   "name": "pailan",
-  "scripts": {
-  },
+  "scripts": {},
   "env": {
-    "GOOGLE_ID": {
-      "required": true
-    },
-    "GOOGLE_SECRET": {
-      "required": true
-    },
-    "MONGOLAB_URI": {
-      "required": true
-    },
-    "SESSION_SECRET": {
-      "required": true
-    },
-    "USER_ENCRYPTION_KEY": {
-      "required": true
-    }
+    "GOOGLE_ID": { "required": true },
+    "GOOGLE_SECRET": { "required": true },
+    "MONGOLAB_URI": { "required": true },
+    "SESSION_SECRET": { "required": true },
+    "USER_ENCRYPTION_KEY": { "required": true },
+    "SENDGRID_USER": { "required": true },
+    "SENDGRID_PASSWORD": { "required": true },
+    "STRIPE_SKEY": { "required": true },
+    "STRIPE_PKEY": { "required": true }
   },
-  "formation": {
-  },
-  "addons": [
-    "mongolab"
-  ],
+  "formation": {},
+  "addons": ["mongolab"],
   "buildpacks": [
     {
       "url": "heroku/nodejs"

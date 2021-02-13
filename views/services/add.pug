@@ -13,6 +13,7 @@ block main
               i.mdi.mdi-set-none
 
       form#add-service-form(method='post', name='add-service-form')
+        script(src='https://checkout.stripe.com/checkout.js')
         input(type='hidden', name='_csrf', value=_csrf)
         input(type='hidden', name='selectedServiceId', id='selectedServiceId')
         .row.mt-4.pt-4
@@ -42,3 +43,8 @@ block main
             .row
               .col-md
                 input#add-service-button.submitBnt.btn.btn-primary.btn-custom.btn-block(type='submit', value='Add Service')
+  script(type='text/javascript').
+    window.pailan = {
+      user: { services: #{user.services.length}, email: '#{user.email}' },
+      stripe: { pkey: '#{process.env.STRIPE_PKEY}' },
+    };
